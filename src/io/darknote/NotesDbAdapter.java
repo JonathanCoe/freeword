@@ -14,7 +14,7 @@
  * the License.
  */
 
-package info.guardianproject.notepadbot;
+package io.darknote;
 
 import android.content.ContentValues;
 import android.content.Context;

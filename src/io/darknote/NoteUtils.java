@@ -1,4 +1,4 @@
-package info.guardianproject.notepadbot;
+package io.darknote;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+import info.guardianproject.notepadbot.R;
 
 public class NoteUtils {
 	 /*
@@ -27,7 +28,7 @@ public class NoteUtils {
 	        	Intent share = new Intent(Intent.ACTION_SEND);
 	        	share.setType(mimeType);
 	        	share.putExtra(Intent.EXTRA_STREAM, tmpImageUri);
-	        	ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_file)));    	
+	        	ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_file)));
 	    	} else {
 	    		Toast t = Toast.makeText(ctx, R.string.saving_tmp_file_failed, Toast.LENGTH_SHORT); 
 	    		t.show();

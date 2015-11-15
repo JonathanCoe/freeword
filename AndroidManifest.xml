@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.guardianproject.notepadbot"
+    package="io.darknote"
     android:versionCode="13"
     android:versionName="0.1" >
 
@@ -18,13 +18,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="info.guardianproject.notepadbot.App"
+        android:name="io.darknote.App"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".NoteCipher"
+            android:name="io.darknote.NoteCipher"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,21 +42,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoteEdit"
-            android:parentActivityName="info.guardianproject.notepadbot.NoteCipher"
+            android:name="io.darknote.NoteEdit"
+            android:parentActivityName="io.darknote.NoteCipher"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".LockScreenActivity"
+            android:name="io.darknote.LockScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_lock_screen" >
         </activity>
 		
 		<activity
-            android:name=".Settings"
+            android:name="io.darknote.Settings"
             android:label="@string/settings"
             android:screenOrientation="portrait"
-            android:parentActivityName="info.guardianproject.notepadbot.NoteCipher"
+            android:parentActivityName="io.darknote.NoteCipher"
             android:configChanges="orientation|keyboardHidden"  >
         </activity>
         

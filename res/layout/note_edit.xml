@@ -12,7 +12,7 @@
 	
 	<!-- Custom EditText that draws lines like in a notepad -->
 	<view 
-	    class="info.guardianproject.notepadbot.LinedEditText"
+	    class="io.darknote.LinedEditText"
 	    android:id="@+id/body"
 	    style="@style/padtext"
 	    android:focusable="true"

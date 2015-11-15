@@ -1,4 +1,4 @@
-package info.guardianproject.notepadbot;
+package io.darknote;
 
 import android.os.Build;
 import android.os.Process;

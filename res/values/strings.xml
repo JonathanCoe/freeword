@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="rn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">NoteCipher</string>
+    <string name="app_name">Darknote</string>
     <string name="no_notes">No Notes Yet</string>
     <string name="menu_insert">Add Note</string>
     <string name="menu_delete">Delete Item</string>

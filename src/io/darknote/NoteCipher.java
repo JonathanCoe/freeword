@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package info.guardianproject.notepadbot;
+package io.darknote;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -49,6 +49,7 @@ import com.actionbarsherlock.view.MenuItem;
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 
+import info.guardianproject.notepadbot.R;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.FileNotFoundException;
