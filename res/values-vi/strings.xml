@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">NoteCipher</string>
+  <string name="app_name">Darknote</string>
   <string name="no_notes">Hiện chưa có ghi chú nào</string>
   <string name="menu_insert">Thêm ghi chú</string>
   <string name="menu_delete">Xóa đối tượng</string>

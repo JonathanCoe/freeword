@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">NoteCipher</string>
+  <string name="app_name">Darknote</string>
   <string name="no_notes">Encara no hi cap nota</string>
   <string name="menu_insert">Afegeix una nota</string>
   <string name="menu_delete">Esborra element</string>

@@ -2,9 +2,9 @@
 <resources>
 
     <!-- Notification Settings -->
-    <string name="cacheword_notification_cached_title">NoteCipher Unlocked</string>
-    <string name="cacheword_notification_cached">NoteCipher is unlocked. Tap to return.</string>
-    <string name="cacheword_notification_cached_message">NoteCipher is unlocked. Tap to return.</string>
+    <string name="cacheword_notification_cached_title">Darknote Unlocked</string>
+    <string name="cacheword_notification_cached">Darknote is unlocked. Tap to return.</string>
+    <string name="cacheword_notification_cached_message">Darknote is unlocked. Tap to return.</string>
     <bool name="cacheword_use_notification_default">true</bool>  <!--  true = show a notification -->
 
     <!-- To configure the notification icon create a drawable resource named:
