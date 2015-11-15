@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-import info.guardianproject.notepadbot.R;
 
 public class NoteUtils {
 	 /*

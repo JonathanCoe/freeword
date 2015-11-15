@@ -39,7 +39,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import info.guardianproject.notepadbot.R;
 
 public class NoteEdit extends SherlockFragmentActivity implements 
 						ICacheWordSubscriber, LoaderManager.LoaderCallbacks<Cursor>  {

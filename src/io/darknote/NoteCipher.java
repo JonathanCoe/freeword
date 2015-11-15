@@ -49,7 +49,6 @@ import com.actionbarsherlock.view.MenuItem;
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 
-import info.guardianproject.notepadbot.R;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.FileNotFoundException;

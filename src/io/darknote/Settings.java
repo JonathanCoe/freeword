@@ -8,7 +8,6 @@ import info.guardianproject.cacheword.PassphraseSecrets;
 
 import java.io.IOException;
 
-import info.guardianproject.notepadbot.R;
 import net.simonvt.numberpicker.NumberPicker;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

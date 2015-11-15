@@ -25,7 +25,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import info.guardianproject.notepadbot.R;
 
 import java.security.GeneralSecurityException;
 
