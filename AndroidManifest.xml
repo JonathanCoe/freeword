@@ -44,7 +44,8 @@
         <activity
             android:name="io.darknote.NoteEdit"
             android:parentActivityName="io.darknote.NoteCipher"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name="io.darknote.LockScreenActivity"
