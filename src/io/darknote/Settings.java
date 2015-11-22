@@ -1,6 +1,7 @@
 package io.darknote;
 
 
+import android.view.WindowManager;
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.Constants;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
@@ -38,6 +39,11 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+		}
+
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mCacheWord = new CacheWordActivityHandler(this, ((App)getApplication()).getCWSettings());
