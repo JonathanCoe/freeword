@@ -26,8 +26,9 @@ Follow these steps to setup your dev environment using Eclipse:
 * Notepad Icon originally from
     http://yaromanzarek.deviantart.com/art/iPhone-style-Notepad-icon-133822563
 
-This project is licensed under the Apache version 2.0 license
+This project is licensed under the Gnu General Public License version 3. 
 
+Copyright (C) 2015 Jonathan Coe <jcoe@protonmail.ch>
 Copyright (C) 2013 Abel Luck <abel@guardianproject.info>
 Copyright (C) 2011-2013 Nathan Freitas <nathan@freitas.net>
 Copyright (C) 2011 Hans-Christoph Steiner <hans@eds.org>
