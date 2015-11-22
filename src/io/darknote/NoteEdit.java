@@ -139,6 +139,7 @@ public class NoteEdit extends SherlockFragmentActivity implements
 	            return true;
             case SAVE_ID:
                 saveState();
+                Toast.makeText(NoteEdit.this, R.string.note_saved, Toast.LENGTH_SHORT).show();
                 return true;
             case SHARE_ID:
                 shareEntry();

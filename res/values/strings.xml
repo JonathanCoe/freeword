@@ -45,6 +45,7 @@
 	
 	<string name="enter_title">Enter title</string>
 	<string name="enter_note_text">Enter note text</string>
+	<string name="note_saved">Note saved</string>
 	<string name="share_file">Share File</string>
 	<string name="saving_tmp_file_failed">Saving Temporary File Failed!</string>
 	<string name="share_text">Share Text</string>
