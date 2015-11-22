@@ -41,6 +41,7 @@
 	<string name="lock_screen_passphrase_not_set_enter">Enter new passphrase</string>
 	<string name="lock_screen_passphrase_not_set_confirm">Confirm new passphrase</string>
 	<string name="lock_screen_passphrases_not_matching">Passphrases did not match, please try again</string>
+    <string name="lock_screen_passphrase_incorrect">Incorrect passphrase</string>
 	
 	<string name="enter_title">Enter title</string>
 	<string name="enter_note_text">Enter note text</string>

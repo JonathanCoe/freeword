@@ -201,6 +201,9 @@ public class LockScreenActivity extends SherlockActivity implements ICacheWordSu
                 } catch (GeneralSecurityException e) {
                     mEnterPassphrase.setText("");
                     // TODO implement try again and wipe if fail
+                    Toast.makeText(LockScreenActivity.this,
+                                   R.string.lock_screen_passphrase_incorrect,
+                                   Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Cacheword pass verification failed: " + e.getMessage());
                     return;
                 }
