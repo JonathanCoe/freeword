@@ -29,8 +29,6 @@ import java.io.IOException;
 @SuppressWarnings("deprecation")
 public class Settings extends SherlockPreferenceActivity implements ICacheWordSubscriber {
 
-    public static final String LANG_SEL_KEY = "langSelected";
-
     private CacheWordActivityHandler mCacheWord;
 
     private static final String TAG = Settings.class.getSimpleName();
