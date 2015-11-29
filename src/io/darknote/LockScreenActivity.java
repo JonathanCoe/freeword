@@ -1,4 +1,3 @@
-
 package io.darknote;
 
 import android.content.Intent;
@@ -15,16 +14,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
-
 import com.actionbarsherlock.app.SherlockActivity;
-
 import info.guardianproject.cacheword.CacheWordActivityHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 

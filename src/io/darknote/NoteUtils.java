@@ -1,13 +1,5 @@
 package io.darknote;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,37 +7,38 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.*;
+
 public class NoteUtils {
 
-	private static final String TAG = NoteUtils.class.getSimpleName();
+    private static final String TAG = NoteUtils.class.getSimpleName();
 
-		/*
-		 * When the user selects the Share menu item
-		 * Uses saveTmpImage (overwriting what is already there) and uses the standard Android Share Intent
-		 */
-	    public static void shareData(Context ctx, String filename, String mimeType, byte[] outdata) throws IOException {
-	    	Uri tmpImageUri = saveTmpFile(ctx, filename, mimeType, outdata);
-	    	
-	    	if (tmpImageUri != null) {
-	        	Intent share = new Intent(Intent.ACTION_SEND);
-	        	share.setType(mimeType);
-	        	share.putExtra(Intent.EXTRA_STREAM, tmpImageUri);
-	        	ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_file)));
-	    	} else {
-	    		Toast t = Toast.makeText(ctx, R.string.saving_tmp_file_failed, Toast.LENGTH_SHORT); 
-	    		t.show();
-	    	}
-	    }
+    /*
+     * When the user selects the Share menu item
+     * Uses saveTmpImage (overwriting what is already there) and uses the standard Android Share Intent
+     */
+    public static void shareData(Context ctx, String filename, String mimeType, byte[] outdata) throws IOException {
+        Uri tmpImageUri = saveTmpFile(ctx, filename, mimeType, outdata);
+
+        if (tmpImageUri != null) {
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType(mimeType);
+            share.putExtra(Intent.EXTRA_STREAM, tmpImageUri);
+            ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_file)));
+        } else {
+            Toast t = Toast.makeText(ctx, R.string.saving_tmp_file_failed, Toast.LENGTH_SHORT);
+            t.show();
+        }
+    }
 	    
-	    public static void shareText(Context ctx, String outdata) {
-	    	Intent share = new Intent(Intent.ACTION_SEND);
-	    	share.setType("text/plain");
-	    	share.putExtra(Intent.EXTRA_TEXT, outdata);
-	    	ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_text)));    	
-		
-	    }
+    public static void shareText(Context ctx, String outdata) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, outdata);
+        ctx.startActivity(Intent.createChooser(share, ctx.getString(R.string.share_text)));
+    }
 	    
-	public static File getExternalFilesDirEclair(Context ctx, Object object) {
+    public static File getExternalFilesDirEclair(Context ctx, Object object) {
 		String packageName = ctx.getPackageName();
 		File externalPath = Environment.getExternalStorageDirectory();
 		File appFiles = new File(externalPath.getAbsolutePath() +
@@ -57,17 +50,19 @@ public class NoteUtils {
 		return appFiles;
 	}
 
-	public static boolean cleanupTmp (Context ctx) {
+    public static boolean cleanupTmp (Context ctx) {
 		  //delete temp share file
 		  File file = new File(NoteUtils.getExternalFilesDirEclair(ctx, null), "nctemp.jpg");
 		  if (file.exists()) {
 			  file.delete();
 			  return true;
-		  } else
-			  return false;
-	}
-	
-	public static Uri saveTmpFile(Context ctx, String filename, String mimeType, byte[] outdata) throws IOException {
+		  }
+          else {
+              return false;
+          }
+    }
+
+    public static Uri saveTmpFile(Context ctx, String filename, String mimeType, byte[] outdata) throws IOException {
 		
         // Create a path where we will place our picture in the user's
         // public pictures directory.  Note that you should be careful about
@@ -96,12 +91,9 @@ public class NoteUtils {
     	Uri tmpImageUri = Uri.fromFile(file);
     	
     	return tmpImageUri;
-
-      
     }
-	
-	
-	public static boolean savePublicFile(Context ctx, String title, String mimeType, byte[] outdata) {
+
+    public static boolean savePublicFile(Context ctx, String title, String mimeType, byte[] outdata) {
 		
         // Create a path where we will place our picture in the user's
         // public pictures directory.  Note that you should be careful about
@@ -162,12 +154,11 @@ public class NoteUtils {
             // Unable to create file, likely because external storage is
             // not currently mounted.
             Log.w(TAG, "Error writing " + file, e);
-            
             return false;
         }
     }
-	
-	public static byte[] readBytesAndClose(InputStream in) throws IOException {
+
+    public static byte[] readBytesAndClose(InputStream in) throws IOException {
 	    try {
 	        int block = 4 * 1024;
 	        ByteArrayOutputStream out = new ByteArrayOutputStream(block);
@@ -184,5 +175,4 @@ public class NoteUtils {
 	        in.close();
 	    }
 	}
-
 }

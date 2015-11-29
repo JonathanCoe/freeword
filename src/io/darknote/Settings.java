@@ -1,15 +1,5 @@
 package io.darknote;
 
-
-import android.view.WindowManager;
-import info.guardianproject.cacheword.CacheWordActivityHandler;
-import info.guardianproject.cacheword.Constants;
-import info.guardianproject.cacheword.ICacheWordSubscriber;
-import info.guardianproject.cacheword.PassphraseSecrets;
-
-import java.io.IOException;
-
-import net.simonvt.numberpicker.NumberPicker;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,23 +13,30 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import info.guardianproject.cacheword.CacheWordActivityHandler;
+import info.guardianproject.cacheword.Constants;
+import info.guardianproject.cacheword.ICacheWordSubscriber;
+import info.guardianproject.cacheword.PassphraseSecrets;
+import net.simonvt.numberpicker.NumberPicker;
+
+import java.io.IOException;
 
 @SuppressLint("NewApi")
 @SuppressWarnings("deprecation")
 public class Settings extends SherlockPreferenceActivity implements ICacheWordSubscriber {
 
-	public static final String LANG_SEL_KEY = "langSelected";
+    public static final String LANG_SEL_KEY = "langSelected";
 
-	private CacheWordActivityHandler mCacheWord;
+    private CacheWordActivityHandler mCacheWord;
 
-	private static final String TAG = Settings.class.getSimpleName();
+    private static final String TAG = Settings.class.getSimpleName();
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -80,10 +77,8 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 		}
 	}
 
-
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			NavUtils.navigateUpTo(this, new Intent(this, NoteCipher.class));
@@ -92,12 +87,12 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
+    @Override
 	public void onDestroy() {
 		super.onDestroy();
 	}
 
-	private Preference.OnPreferenceClickListener changeLockTimeoutListener =
+    private Preference.OnPreferenceClickListener changeLockTimeoutListener =
 			new Preference.OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference pref) {
@@ -106,18 +101,16 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 					}
 	};
 
-	private Preference.OnPreferenceChangeListener vibrateChangeListener =
-			new OnPreferenceChangeListener(){
+    private Preference.OnPreferenceChangeListener vibrateChangeListener = new OnPreferenceChangeListener(){
 		@Override
-		public boolean onPreferenceChange(Preference pref, Object newValue) {
+        public boolean onPreferenceChange(Preference pref, Object newValue) {
 			// save option internally in cacheword as well
 			mCacheWord.setVibrateSetting((Boolean) newValue);
 			return true;
 		}
 	};
 
-	private Preference.OnPreferenceChangeListener passphraseChangeListener =
-			new OnPreferenceChangeListener(){
+    private Preference.OnPreferenceChangeListener passphraseChangeListener = new OnPreferenceChangeListener(){
 		@Override
 		public boolean onPreferenceChange(Preference pref, Object newValue) {
 			// save option internally in cacheword as well
@@ -137,12 +130,13 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 		}
 	};
 
-	public static final boolean getNoteLinesOption(Context context) {
+    public static final boolean getNoteLinesOption(Context context) {
 		boolean defValue = context.getResources().getBoolean(R.bool.notecipher_uselines_default);
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(NConstants.SHARED_PREFS_NOTELINES, defValue);
 	}
 
-	private void changeTimeoutPrompt() {
+    private void changeTimeoutPrompt() {
+
 		if (mCacheWord.isLocked()) {
 			return;
 		}
@@ -176,26 +170,26 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
         builder.show();
     }
 
-	@Override
-	public void onCacheWordUninitialized() {
+    @Override
+    public void onCacheWordUninitialized() {
 		Log.d(TAG, "onCacheWordUninitialized");
 		System.gc();
 		showLockScreen();
 	}
 
-	@Override
-	public void onCacheWordLocked() {
+    @Override
+    public void onCacheWordLocked() {
 		Log.d(TAG, "onCacheWordLocked");
 		System.gc();
 		showLockScreen();
 	}
 
-	@Override
-	public void onCacheWordOpened() {
+    @Override
+    public void onCacheWordOpened() {
 		Log.d(TAG, "onCacheWordOpened");
 	}
 
-	@Override
+    @Override
     protected void onPause() {
         super.onPause();
         mCacheWord.onPause();

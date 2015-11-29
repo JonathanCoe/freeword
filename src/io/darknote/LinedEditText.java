@@ -11,6 +11,7 @@ import android.widget.EditText;
  * A custom EditText that draws lines between each line of text that is displayed.
  */
 public class LinedEditText extends EditText {
+
     private Rect mRect;
     private Paint mPaint;
     private boolean showLines;

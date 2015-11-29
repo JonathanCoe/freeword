@@ -3,7 +3,6 @@ package io.darknote;
 import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Intent;
-
 import info.guardianproject.cacheword.CacheWordSettings;
 
 public class App extends Application {
@@ -24,6 +23,4 @@ public class App extends Application {
     public CacheWordSettings getCWSettings() {
         return mCWSettings;
     }
-
-
 }
