@@ -123,10 +123,10 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 
 				if (NConstants.validatePassword(pass)) {
 					mCacheWord.changePassphrase((PassphraseSecrets) mCacheWord.getCachedSecrets(), pass);
+                    Toast.makeText(getApplicationContext(), R.string.passphrase_changed, Toast.LENGTH_SHORT).show();
 				}
                 else {
-					Toast.makeText(getApplicationContext(),
-							R.string.pass_err_length, Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), R.string.pass_err_length, Toast.LENGTH_SHORT).show();
 				}
 			}
             catch (IOException e) {

@@ -63,5 +63,6 @@
 	<string name="vibrate_when_unlocked">Vibrate when unlocked</string>
 	<string name="vibrate_when_unlocked_summ">If enabled, the device will vibrate every time Darknote is unlocked with a passphrase</string>
 	<string name="change_passphrase">Change Passphrase</string>
+    <string name="passphrase_changed">Passphrase successfully changed</string>
 	
 </resources>
