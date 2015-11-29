@@ -2,8 +2,7 @@ package io.darknote;
 
 public class NConstants {
 	public static final String SHARED_PREFS_NOTELINES = "use_lines_in_notes";
-	
-	 public static final String TAG = "NoteCipher";
+
 	 public static final int MAX_STREAM_SIZE = 1000000;
 	 public static final int MIN_PASS_LENGTH = 8;
      // public final static int MAX_PASS_ATTEMPTS = 3;

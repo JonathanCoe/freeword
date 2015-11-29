@@ -44,7 +44,6 @@ import info.guardianproject.cacheword.ICacheWordSubscriber;
 
 public class NoteEdit extends SherlockFragmentActivity implements 
 						ICacheWordSubscriber, LoaderManager.LoaderCallbacks<Cursor>  {
-    // private final static String TAG = "NoteEdit";
 
     private EditText mTitleText;
     private LinedEditText mBodyText;
@@ -67,6 +66,8 @@ public class NoteEdit extends SherlockFragmentActivity implements
     private final static String TEXT_SIZE = "text_size";
     private final static String PREFS_NAME = "NoteEditPrefs";
     private final static int LOADER_ID = 33245;
+
+    private static final String TAG = NoteEdit.class.getSimpleName();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,7 +221,7 @@ public class NoteEdit extends SherlockFragmentActivity implements
             note.close();
             
         } catch (Exception e) {
-            Log.e("notepadbot", "error populating", e);
+            Log.e(TAG, "error populating", e);
             Toast.makeText(this, getString(R.string.err_loading_note, e.getMessage()),
                     Toast.LENGTH_LONG).show();
         }

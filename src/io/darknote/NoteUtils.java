@@ -16,7 +16,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class NoteUtils {
-	 /*
+
+	private static final String TAG = NoteUtils.class.getSimpleName();
+
+		/*
 		 * When the user selects the Share menu item
 		 * Uses saveTmpImage (overwriting what is already there) and uses the standard Android Share Intent
 		 */
@@ -158,7 +161,7 @@ public class NoteUtils {
         } catch (IOException e) {
             // Unable to create file, likely because external storage is
             // not currently mounted.
-            Log.w("ExternalStorage", "Error writing " + file, e);
+            Log.w(TAG, "Error writing " + file, e);
             
             return false;
         }

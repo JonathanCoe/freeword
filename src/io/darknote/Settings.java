@@ -36,6 +36,8 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 
 	private CacheWordActivityHandler mCacheWord;
 
+	private static final String TAG = Settings.class.getSimpleName();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -176,21 +178,21 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 
 	@Override
 	public void onCacheWordUninitialized() {
-		Log.d(NConstants.TAG, "onCacheWordUninitialized");
+		Log.d(TAG, "onCacheWordUninitialized");
 		System.gc();
 		showLockScreen();
 	}
 
 	@Override
 	public void onCacheWordLocked() {
-		Log.d(NConstants.TAG, "onCacheWordLocked");
+		Log.d(TAG, "onCacheWordLocked");
 		System.gc();
 		showLockScreen();
 	}
 
 	@Override
 	public void onCacheWordOpened() {
-		Log.d(NConstants.TAG, "onCacheWordOpened");
+		Log.d(TAG, "onCacheWordOpened");
 	}
 
 	@Override

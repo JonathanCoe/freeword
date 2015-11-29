@@ -78,6 +78,8 @@ public class NoteCipher extends SherlockFragmentActivity implements ICacheWordSu
 
     private ListView notesListView;
     private SimpleCursorAdapter notesCursorAdapter;
+
+    private static final String TAG = NoteCipher.class.getSimpleName();
     
     /** Called when the activity is first created. */
     @Override
@@ -436,10 +438,10 @@ public class NoteCipher extends SherlockFragmentActivity implements ICacheWordSu
             }
 
         } catch (FileNotFoundException e) {
-            Log.e(NConstants.TAG, e.getMessage(), e);
+            Log.e(TAG, e.getMessage(), e);
 
         } catch (IOException e) {
-            Log.e(NConstants.TAG, e.getMessage(), e);
+            Log.e(TAG, e.getMessage(), e);
 
         } catch (OutOfMemoryError e) {
             Toast.makeText(this, R.string.err_size, Toast.LENGTH_LONG).show();
@@ -502,19 +504,19 @@ public class NoteCipher extends SherlockFragmentActivity implements ICacheWordSu
 
     @Override
     public void onCacheWordUninitialized() {
-        Log.d(NConstants.TAG, "onCacheWordUninitialized");
+        Log.d(TAG, "onCacheWordUninitialized");
         clearViewsAndLock();
     }
 
     @Override
     public void onCacheWordLocked() {
-        Log.d(NConstants.TAG, "onCacheWordLocked");
+        Log.d(TAG, "onCacheWordLocked");
         clearViewsAndLock();
     }
 
     @Override
     public void onCacheWordOpened() {
-        Log.d(NConstants.TAG, "onCacheWordOpened");
+        Log.d(TAG, "onCacheWordOpened");
         unlockDatabase();
 
         if (mDbHelper.isOpen()) {

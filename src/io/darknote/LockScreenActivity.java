@@ -31,7 +31,6 @@ import info.guardianproject.cacheword.ICacheWordSubscriber;
 import java.security.GeneralSecurityException;
 
 public class LockScreenActivity extends SherlockActivity implements ICacheWordSubscriber {
-    private static final String TAG = "LockScreenActivity";
 
     private EditText mEnterPassphrase;
     private EditText mNewPassphrase;
@@ -42,6 +41,8 @@ public class LockScreenActivity extends SherlockActivity implements ICacheWordSu
     private CacheWordActivityHandler mCacheWord;
     private String mPasswordError;
     private TwoViewSlider mSlider;
+
+    private static final String TAG = LockScreenActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

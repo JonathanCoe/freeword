@@ -46,8 +46,6 @@ public class NotesDbAdapter {
     public static final String KEY_TYPE = "otype";
     public static final String KEY_ROWID = "_id";
 
-    private static final String TAG = "NotesDbAdapter";
-
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
 
@@ -65,6 +63,7 @@ public class NotesDbAdapter {
     private Context mCtx;
     private CacheWordHandler mCacheWord;
 
+    private static final String TAG = NotesDbAdapter.class.getSimpleName();
 
     private static class DatabaseHelper extends SQLCipherOpenHelper {
 
