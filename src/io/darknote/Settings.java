@@ -54,24 +54,31 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 						@Override
 						public void onCreate(final Bundle savedInstanceState) {
 							super.onCreate(savedInstanceState);
+
 							addPreferencesFromResource(R.xml.settings);
+
 							findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
 								.setOnPreferenceClickListener(changeLockTimeoutListener);
+
 							findPreference(Constants.SHARED_PREFS_VIBRATE)
 								.setOnPreferenceChangeListener(vibrateChangeListener);
+
 							findPreference(Constants.SHARED_PREFS_SECRETS)
 								.setOnPreferenceChangeListener(passphraseChangeListener);
-
 						}
 					})
 					.commit();
-		} else {
+		}
+        else {
 			// Otherwise load the preferences.xml in the Activity like in previous android versions
 			addPreferencesFromResource(R.xml.settings);
+
 			findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
 				.setOnPreferenceClickListener(changeLockTimeoutListener);
+
 			findPreference(Constants.SHARED_PREFS_VIBRATE)
 				.setOnPreferenceChangeListener(vibrateChangeListener);
+
 			findPreference(Constants.SHARED_PREFS_SECRETS)
 				.setOnPreferenceChangeListener(passphraseChangeListener);
 		}
@@ -92,13 +99,12 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 		super.onDestroy();
 	}
 
-    private Preference.OnPreferenceClickListener changeLockTimeoutListener =
-			new Preference.OnPreferenceClickListener() {
-					@Override
-					public boolean onPreferenceClick(Preference pref) {
-						changeTimeoutPrompt();
-						return true;
-					}
+    private Preference.OnPreferenceClickListener changeLockTimeoutListener = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference pref) {
+            changeTimeoutPrompt();
+            return true;
+        }
 	};
 
     private Preference.OnPreferenceChangeListener vibrateChangeListener = new OnPreferenceChangeListener(){
@@ -116,13 +122,16 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
 			// save option internally in cacheword as well
 			try {
 				char[] pass = ((String) newValue).toCharArray();
+
 				if (NConstants.validatePassword(pass)) {
 					mCacheWord.changePassphrase((PassphraseSecrets) mCacheWord.getCachedSecrets(), pass);
-				} else {
+				}
+                else {
 					Toast.makeText(getApplicationContext(),
 							R.string.pass_err_length, Toast.LENGTH_SHORT).show();
 				}
-			} catch (IOException e) {
+			}
+            catch (IOException e) {
 				Toast.makeText(getApplicationContext(),
 						R.string.pass_err, Toast.LENGTH_SHORT).show();
 			}
@@ -151,21 +160,21 @@ public class Settings extends SherlockPreferenceActivity implements ICacheWordSu
         builder.setView(input);
 
         builder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int timeout = input.getValue();
-                        mCacheWord.setTimeoutSeconds(timeout);
-                        dialog.dismiss();
-                    }
-                });
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    int timeout = input.getValue();
+                    mCacheWord.setTimeoutSeconds(timeout);
+                    dialog.dismiss();
+                }
+            });
         builder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
 
         builder.show();
     }
