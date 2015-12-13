@@ -8,6 +8,7 @@ bin/
 gen/
 app/lint.xml
 app/proguard-project.txt
+build
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -18,3 +19,6 @@ darknote.iml
 
 # IntelliJ generated binaries
 out/
+
+# Gradle
+.gradle/
