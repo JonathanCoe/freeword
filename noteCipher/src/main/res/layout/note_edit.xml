@@ -12,7 +12,7 @@
 	
 	<!-- Custom EditText that draws lines like in a notepad -->
 	<view 
-	    class="io.darknote.LinedEditText"
+	    class="io.darknote.util.LinedEditText"
 	    android:id="@+id/body"
 	    style="@style/padtext"
 	    android:focusable="true"
@@ -28,12 +28,5 @@
 	    android:gravity="top"
         android:singleLine="false"
         android:hint="@string/enter_note_text" />
-		 
-	<ImageView
-        android:id="@+id/odata"
-        android:layout_margin="4dp"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="gone"
-        android:contentDescription="@string/image_data" />
+
 </LinearLayout>

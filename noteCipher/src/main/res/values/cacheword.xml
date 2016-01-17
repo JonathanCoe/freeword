@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Notification Settings -->
+    <!-- Notification SettingsActivity -->
     <string name="cacheword_notification_cached_title">Darknote Unlocked</string>
     <string name="cacheword_notification_cached">Darknote is unlocked. Tap to return.</string>
     <string name="cacheword_notification_cached_message">Darknote is unlocked. Tap to return.</string>

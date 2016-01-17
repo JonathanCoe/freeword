@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="160dp"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:background="@android:color/black" >
+
+    <TextView
+        android:id="@+id/long_press_dialog_delete_header_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textIsSelectable="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/long_press_dialog_delete_header"
+    />
+
+    <TextView
+        android:id="@+id/long_press_dialog_delete_note_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textIsSelectable="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
+    />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+    >
+
+      <Button
+        android:id="@+id/long_press_dialog_delete_confirm_button"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:textSize="18sp"
+        android:hint="@string/long_press_dialog_delete_confirm"
+        />
+
+      <Button
+        android:id="@+id/long_press_dialog_delete_cancel_button"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:textSize="18sp"
+        android:hint="@string/long_press_dialog_delete_cancel"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

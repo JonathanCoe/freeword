@@ -1,41 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="rn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- App -->
     <string name="app_name">Darknote</string>
+
+    <!-- NotesListActivity -->
     <string name="no_notes">No Notes Yet</string>
     <string name="menu_insert">Add Note</string>
     <string name="menu_delete">Delete Item</string>
-    <string name="menu_rekey">Change Passphrase</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_view">Export</string>
-    <string name="menu_save">Save Note</string>
     <string name="menu_lock">Lock Notes</string>
+    <string name="on_start">Tap anywhere to create a new note</string>
+    <string name="long_press_dialog_delete_header">Delete note?</string>
+    <string name="long_press_dialog_delete_confirm">Ok</string>
+    <string name="long_press_dialog_delete_cancel">Cancel</string>
+
+    <!-- NoteActivity -->
     <string name="menu_bigger">Bigger</string>
     <string name="menu_smaller">Smaller</string>
+    <string name="menu_save">Save Note</string>
+    <string name="menu_share">Share</string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_note_text">Enter note text</string>
+    <string name="note_saved">Note saved</string>
+    <string name="share_file">Share File</string>
+    <string name="saving_tmp_file_failed">Saving Temporary File Failed!</string>
+    <string name="share_text">Share Text</string>
+    <string name="err_loading_note">Something went wrong when loading your note: <xliff:g id="error_msg">%1$s</xliff:g></string>
 
+    <!-- LockScreenActivity -->
     <string name="title">Summary</string>
     <string name="body">Note Text</string>
     <string name="confirm">Save Note</string>
     <string name="edit_note">Edit Note</string>
-    <string name="confirm_delete">Do you want to delete the original, unencrypted file?</string>
-    <string name="on_import">Imported new file: <xliff:g id="file_name">%1$s</xliff:g></string>
-    <string name="err_size">Imported file size is too large</string>
-    <string name="err_export">Error exporting image: <xliff:g id="img_name">%1$s</xliff:g></string>
-    <string name="on_start">Tap anywhere to create a new note</string>
     <string name="err_pass">Unable to unlock your notes. Are you sure you entered the right passphrase?</string>
     <string name="button_ok">Okay</string>
     <string name="button_cancel">Cancel</string>
-    <string name="rekey_message">Enter a *new* passphrase. It must contain at least one uppercase, one lowercase and one number, and be longer than six characters.</string>
-    <string name="do_rekey">Encrypting your existing notes with the new passphrase (patience&#8230;)</string>
+    <string name="rekey_message">Enter a *new* passphrase. It must contain at least one uppercase, one lowercase
+        and one number, and be longer than six characters.</string>
     <string name="enter_pass">Enter your passphrase:</string>
-    <string name="new_pass">Welcome! Enter a strong passphrase to secure your notes. It must contain at least one uppercase, one lowercase and one number, and be longer than six characters.</string>
+    <string name="new_pass">Welcome! Enter a strong passphrase to secure your notes. It must contain at least one
+        uppercase, one lowercase and one number, and be longer than six characters.</string>
     <string name="pass_err_length">Your passphrase was not long enough</string>
     <string name="pass_err_upper">Your passphrase did not contain any uppercase letters</string>
     <string name="pass_err_lower">Your passphrase did not contain any lowercase letters</string>
     <string name="pass_err_num">Your passphrase did not contain any numbers</string>
     <string name="pass_err">Error during passphrase change!</string>
-    
     <string name="lock_screen_open">Open</string>
-    <string name="title_activity_lock_screen">Darknote Locked</string>
+    <string name="title_activity_lock_screen">Darknote</string>
     <string name="lock_screen_create_passphrase">Create passphrase</string>
 	<string name="lock_screen_passphrase_hint">Enter passphrase</string>
 	<string name="lock_screen_passphrase_not_set_enter">Enter new passphrase</string>
@@ -43,25 +54,17 @@
 	<string name="lock_screen_passphrases_not_matching">Passphrases did not match, please try again</string>
     <string name="lock_screen_passphrase_incorrect">Incorrect passphrase</string>
 	
-	<string name="enter_title">Enter title</string>
-	<string name="enter_note_text">Enter note text</string>
-	<string name="note_saved">Note saved</string>
-	<string name="share_file">Share File</string>
-	<string name="saving_tmp_file_failed">Saving Temporary File Failed!</string>
-	<string name="share_text">Share Text</string>
-	<string name="image_data">Image Data</string>
-	<string name="err_loading_note">Something went wrong when loading your note: <xliff:g id="error_msg">%1$s</xliff:g></string>
-	<string name="unable_to_delete_original">Unable to delete original</string>
-	
-	<!-- Settings Strings -->
+	<!-- SettingsActivity -->
 	<string name="settings">Settings</string>
 	<string name="general_settings">General Settings</string>
 	<string name="change_timeout_prompt_title">Change Lock Timeout</string>
 	<string name="change_timeout_prompt">After how many minutes of inactivity should Darknote lock itself?</string>
 	<string name="use_lines_in_notes">Use lines in notes</string>
-	<string name="use_lines_in_notes_summ">If enabled, empty lines will be displayed on all notes to resemble a notepad</string>
+	<string name="use_lines_in_notes_summ">If enabled, empty lines will be displayed on all notes to
+        resemble a notepad</string>
 	<string name="vibrate_when_unlocked">Vibrate when unlocked</string>
-	<string name="vibrate_when_unlocked_summ">If enabled, the device will vibrate every time Darknote is unlocked with a passphrase</string>
+	<string name="vibrate_when_unlocked_summ">If enabled, the device will vibrate every time Darknote is
+        unlocked with a passphrase</string>
 	<string name="change_passphrase">Change Passphrase</string>
     <string name="passphrase_changed">Passphrase successfully changed</string>
 	

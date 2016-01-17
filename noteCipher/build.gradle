@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "io.darknote"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 23
         multiDexEnabled true
     }
@@ -20,10 +20,11 @@ android {
 }
 
 dependencies {
-    compile project(':cacheWord')
+    compile 'info.guardianproject.cacheword:cachewordlib:0.1'
     compile project(':androidnumberpickerb4562f')
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.google.guava:guava:18.0'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:23.1.1'
+    compile files('libs/sqlcipher.jar')
 }
