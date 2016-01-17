@@ -142,7 +142,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
 	        	NavUtils.navigateUpTo(this, new Intent(this, NotesListActivity.class));
 	            return true;
             case SAVE_ID:
-                saveState();
+                saveNote();
                 Toast.makeText(NoteActivity.this, R.string.note_saved, Toast.LENGTH_SHORT).show();
                 return true;
             case SHARE_ID:
@@ -183,7 +183,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        saveState();
+        saveNoteIfNotEmpty();
 
         if (mRowId != -1) {
             outState.putLong(KEY_SAVED_POSITION, mRowId);
@@ -197,11 +197,8 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     protected void onPause() {
         super.onPause();
 
-        // We double check that the database is unlocked
-        // and if a timeout or manually locking occurred, the
-        // db is already locked when we get here.
         if (!cacheWordHandler.isLocked()) {
-            saveState();
+            saveNoteIfNotEmpty();
         }
         cacheWordHandler.disconnectFromService();
     }
@@ -224,12 +221,15 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
             .commit();
     }
 
-    private void saveState() {
-
-        Log.d(TAG, "saveState() called");
+    private void saveNote() {
+        Log.d(TAG, "saveNote() called");
 
         String title = titleTextView.getText().toString();
         String body = bodyEditText.getText().toString();
+
+        if (title.isEmpty() && body.isEmpty()) {
+            return;
+        }
 
         if(title.isEmpty()) {
             if (!body.isEmpty()) {
@@ -256,6 +256,21 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         }
 
         noteExistsInDatabase = true;
+    }
+
+    private void saveNoteIfNotEmpty() {
+
+        Log.d(TAG, "saveNoteIfNotEmpty() called");
+
+        String title = titleTextView.getText().toString();
+        String body = bodyEditText.getText().toString();
+
+        if (title.isEmpty() && body.isEmpty()) {
+            return;
+        }
+        else {
+            saveNote();
+        }
     }
 
     private void shareEntry() {
