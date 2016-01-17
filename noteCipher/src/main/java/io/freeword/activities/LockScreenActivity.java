@@ -19,7 +19,7 @@ import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import io.freeword.core.NConstants;
+import io.freeword.util.PassphraseUtil;
 import io.freeword.R;
 
 import java.security.GeneralSecurityException;
@@ -124,7 +124,7 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     }
 
     private boolean isPasswordValid() {
-    	boolean valid = NConstants.validatePassword(newPassphraseEditText.getText().toString().toCharArray());
+    	boolean valid = PassphraseUtil.validatePassphrase(newPassphraseEditText.getText().toString().toCharArray());
     	if(!valid)
     		mPasswordError = getString(R.string.pass_err_length);
         return valid;

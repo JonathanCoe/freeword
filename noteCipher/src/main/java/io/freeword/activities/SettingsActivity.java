@@ -21,7 +21,7 @@ import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.Constants;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 import info.guardianproject.cacheword.PassphraseSecrets;
-import io.freeword.core.NConstants;
+import io.freeword.util.PassphraseUtil;
 import io.freeword.R;
 import net.simonvt.numberpicker.NumberPicker;
 
@@ -151,7 +151,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
 			try {
 				char[] pass = ((String) newValue).toCharArray();
 
-				if (NConstants.validatePassword(pass)) {
+				if (PassphraseUtil.validatePassphrase(pass)) {
 					cacheWordHandler.changePassphrase((PassphraseSecrets) cacheWordHandler.getCachedSecrets(), pass);
                     Toast.makeText(getApplicationContext(), R.string.passphrase_changed, Toast.LENGTH_SHORT).show();
 				}
