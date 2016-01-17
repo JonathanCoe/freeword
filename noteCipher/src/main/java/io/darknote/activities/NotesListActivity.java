@@ -223,7 +223,7 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
 
                     final Dialog longPressDialog = new Dialog(NotesListActivity.this);
                     LinearLayout dialogLayout = (LinearLayout) View.inflate(NotesListActivity.this,
-                            R.layout.note_list_long_press_dialog, null);
+                            R.layout.delete_note_dialog, null);
                     longPressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     longPressDialog.setContentView(dialogLayout);
 
@@ -235,25 +235,25 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
                     longPressDialog.getWindow().setAttributes(lp);
 
                     final Note selectedNote = ((NoteAdapter)notesListView.getAdapter()).getItem(selectedPosition);
-                    TextView noteTitleTextView = (TextView) dialogLayout.findViewById(R.id.long_press_dialog_delete_note_title_textview);
+                    TextView noteTitleTextView = (TextView) dialogLayout.findViewById(R.id.delete_note_dialog_delete_note_title_textview);
                     noteTitleTextView.setText(selectedNote.getTitle());
 
-                    Button confirmDeleteButton = (Button) dialogLayout.findViewById(R.id.long_press_dialog_delete_confirm_button);
+                    Button confirmDeleteButton = (Button) dialogLayout.findViewById(R.id.delete_note_dialog_confirm_button);
                     confirmDeleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d(TAG, "Note list long press dialog confirm delete button clicked");
+                            Log.d(TAG, "Note list delete dialog confirm button clicked");
                             noteProvider.deleteNote(selectedNote);
                             updateListView();
                             longPressDialog.dismiss();
                         }
                     });
 
-                    Button cancelDeleteButton = (Button) dialogLayout.findViewById(R.id.long_press_dialog_delete_cancel_button);
+                    Button cancelDeleteButton = (Button) dialogLayout.findViewById(R.id.delete_note_dialog_cancel_button);
                     cancelDeleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d(TAG, "Note list long press dialog cancel delete button clicked");
+                            Log.d(TAG, "Note list delete dialog cancel button clicked");
                             longPressDialog.dismiss();
                         }
                     });

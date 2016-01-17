@@ -7,18 +7,18 @@
     <!-- NotesListActivity -->
     <string name="no_notes">No Notes Yet</string>
     <string name="menu_insert">Add Note</string>
-    <string name="menu_delete">Delete Item</string>
     <string name="menu_lock">Lock Notes</string>
     <string name="on_start">Tap anywhere to create a new note</string>
-    <string name="long_press_dialog_delete_header">Delete note?</string>
-    <string name="long_press_dialog_delete_confirm">Ok</string>
-    <string name="long_press_dialog_delete_cancel">Cancel</string>
+    <string name="delete_note_dialog_delete_header">Delete note?</string>
+    <string name="delete_note_dialog_confirm">Ok</string>
+    <string name="delete_note_dialog_cancel">Cancel</string>
 
     <!-- NoteActivity -->
-    <string name="menu_bigger">Bigger</string>
-    <string name="menu_smaller">Smaller</string>
+    <string name="menu_bigger">Larger text</string>
+    <string name="menu_smaller">Smaller text</string>
     <string name="menu_save">Save Note</string>
     <string name="menu_share">Share</string>
+    <string name="menu_delete">Delete</string>
     <string name="enter_title">Enter title</string>
     <string name="enter_note_text">Enter note text</string>
     <string name="note_saved">Note saved</string>

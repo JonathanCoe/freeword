@@ -1,5 +1,6 @@
 package io.darknote.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,11 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 import io.darknote.R;
@@ -41,9 +39,11 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     private float mTextSize = 0;
 
     private static final int SAVE_ID = Menu.FIRST;
-    private static final int SHARE_ID = Menu.FIRST + 1;
-    private static final int BIGGER_ID = Menu.FIRST + 2;
-    private static final int SMALLER_ID = Menu.FIRST + 3;
+    private static final int LOCK_ID = Menu.FIRST + 1;
+    private static final int SHARE_ID = Menu.FIRST + 2;
+    private static final int DELETE_ID = Menu.FIRST + 3;
+    private static final int BIGGER_ID = Menu.FIRST + 4;
+    private static final int SMALLER_ID = Menu.FIRST + 5;
 
     private final static String TEXT_SIZE = "text_size";
     private final static String PREFS_NAME = "NoteEditPrefs";
@@ -122,12 +122,23 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         menu.add(0, SAVE_ID, 0, R.string.menu_save)
 	        .setIcon(R.drawable.save)
 	    	.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        menu.add(0, LOCK_ID, 0, R.string.menu_lock)
+                .setIcon(R.drawable.lock)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        menu.add(0, DELETE_ID, 0, R.string.menu_delete)
+                .setIcon(R.drawable.delete)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
         menu.add(0, SHARE_ID, 0, R.string.menu_share)
 	        .setIcon(R.drawable.share)
 	    	.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
         menu.add(0, SMALLER_ID, 0, R.string.menu_smaller)
             .setIcon(R.drawable.smaller)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
         menu.add(0, BIGGER_ID, 0, R.string.menu_bigger)
             .setIcon(R.drawable.bigger)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -138,19 +149,32 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
+
 	        case android.R.id.home:
 	        	NavUtils.navigateUpTo(this, new Intent(this, NotesListActivity.class));
 	            return true;
+
             case SAVE_ID:
                 saveNote();
                 Toast.makeText(NoteActivity.this, R.string.note_saved, Toast.LENGTH_SHORT).show();
                 return true;
-            case SHARE_ID:
-                shareEntry();
+
+            case LOCK_ID:
+                onCacheWordLocked();
                 return true;
+
+            case DELETE_ID:
+                showDeleteDialog();
+                return true;
+
+            case SHARE_ID:
+                shareNote();
+                return true;
+
             case BIGGER_ID:
                 changeTextSize(1.1f);
                 return true;
+
             case SMALLER_ID:
                 changeTextSize(.9f);
                 return true;
@@ -273,7 +297,47 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         }
     }
 
-    private void shareEntry() {
+    private void showDeleteDialog() {
+        Log.d(TAG, "showDeleteDialog() called");
+
+        final Dialog deleteDialog = new Dialog(NoteActivity.this);
+        LinearLayout dialogLayout = (LinearLayout) View.inflate(NoteActivity.this,
+                R.layout.delete_note_dialog, null);
+        deleteDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        deleteDialog.setContentView(dialogLayout);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(deleteDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
+        deleteDialog.show();
+        deleteDialog.getWindow().setAttributes(lp);
+
+        TextView noteTitleTextView = (TextView) dialogLayout.findViewById(R.id.delete_note_dialog_delete_note_title_textview);
+        noteTitleTextView.setText(note.getTitle());
+
+        Button confirmDeleteButton = (Button) dialogLayout.findViewById(R.id.delete_note_dialog_confirm_button);
+        confirmDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Delete dialog confirm button clicked");
+                noteProvider.deleteNote(note);
+                finish();
+            }
+        });
+
+        Button cancelDeleteButton = (Button) dialogLayout.findViewById(R.id.delete_note_dialog_cancel_button);
+        cancelDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Delete dialog cancel button clicked");
+                deleteDialog.dismiss();
+            }
+        });
+    }
+
+    private void shareNote() {
+        Log.d(TAG, "shareNote() called");
         String body = bodyEditText.getText().toString();
         NoteUtils.shareText(this, body);
     }

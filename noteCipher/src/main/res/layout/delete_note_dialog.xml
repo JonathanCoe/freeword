@@ -8,7 +8,7 @@
   android:background="@android:color/black" >
 
     <TextView
-        android:id="@+id/long_press_dialog_delete_header_textview"
+        android:id="@+id/delete_note_dialog_delete_header_textview"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="2dp"
@@ -18,11 +18,11 @@
         android:textIsSelectable="true"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@string/long_press_dialog_delete_header"
+        android:text="@string/delete_note_dialog_delete_header"
     />
 
     <TextView
-        android:id="@+id/long_press_dialog_delete_note_title_textview"
+        android:id="@+id/delete_note_dialog_delete_note_title_textview"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="2dp"
@@ -41,7 +41,7 @@
     >
 
       <Button
-        android:id="@+id/long_press_dialog_delete_confirm_button"
+        android:id="@+id/delete_note_dialog_confirm_button"
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -50,11 +50,11 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:textSize="18sp"
-        android:hint="@string/long_press_dialog_delete_confirm"
+        android:hint="@string/delete_note_dialog_confirm"
         />
 
       <Button
-        android:id="@+id/long_press_dialog_delete_cancel_button"
+        android:id="@+id/delete_note_dialog_cancel_button"
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -63,7 +63,7 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:textSize="18sp"
-        android:hint="@string/long_press_dialog_delete_cancel"
+        android:hint="@string/delete_note_dialog_cancel"
         />
 
     </LinearLayout>
