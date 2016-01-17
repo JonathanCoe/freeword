@@ -251,10 +251,6 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         String title = titleTextView.getText().toString();
         String body = bodyEditText.getText().toString();
 
-        if (title.isEmpty() && body.isEmpty()) {
-            return;
-        }
-
         if(title.isEmpty()) {
             if (!body.isEmpty()) {
                 note.setTitle(body.substring(0, DEFAULT_TITLE_LENGTH));
