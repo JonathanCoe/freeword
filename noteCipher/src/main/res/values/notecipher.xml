@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-          Whether to show lines in created notes or not.
+          Whether to show lines in notes or not.
     -->
-    <bool name="notecipher_uselines_default">true</bool>
+    <bool name="notecipher_uselines_default">false</bool>
 </resources>
-
