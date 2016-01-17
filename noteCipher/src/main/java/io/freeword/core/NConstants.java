@@ -2,8 +2,6 @@ package io.freeword.core;
 
 public class NConstants {
 
-	public static final String SHARED_PREFS_NOTELINES = "use_lines_in_notes";
-
 	public static final int MIN_PASS_LENGTH = 8;
 	 
 	/**

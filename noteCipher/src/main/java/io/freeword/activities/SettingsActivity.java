@@ -31,6 +31,8 @@ import java.io.IOException;
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends SherlockPreferenceActivity implements ICacheWordSubscriber {
 
+    private static final String SHOW_LINES_IN_NOTES = "use_lines_in_notes";
+
 	private CacheWordHandler cacheWordHandler;
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
@@ -130,7 +132,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
 
     public static final boolean getNoteLinesOption(Context context) {
         boolean defValue = context.getResources().getBoolean(R.bool.notecipher_uselines_default);
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(NConstants.SHARED_PREFS_NOTELINES, defValue);
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(SHOW_LINES_IN_NOTES, defValue);
     }
 
 
