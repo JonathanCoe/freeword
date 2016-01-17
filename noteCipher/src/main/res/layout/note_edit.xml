@@ -9,7 +9,7 @@
 	  	android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		style="@style/padtitle"
-		android:inputType="textCapSentences"
+		android:inputType="textMultiLine|textCapSentences"
 		android:hint="@string/enter_title" />
 	
 	<!-- Custom EditText that draws lines like in a notepad -->
@@ -29,7 +29,7 @@
 	    android:fadingEdge="vertical"
 	    android:gravity="top"
         android:singleLine="false"
-		android:inputType="textCapSentences"
+		android:inputType="textMultiLine|textCapSentences"
         android:hint="@string/enter_note_text" />
 
 </LinearLayout>
