@@ -160,6 +160,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
                 return true;
 
             case LOCK_ID:
+                saveNoteIfNotEmpty();
                 onCacheWordLocked();
                 return true;
 
