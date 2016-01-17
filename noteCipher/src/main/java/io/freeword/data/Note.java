@@ -1,4 +1,4 @@
-package io.darknote.data;
+package io.freeword.data;
 
 public class Note implements Comparable<Note>
 {

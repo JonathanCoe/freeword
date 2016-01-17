@@ -1,4 +1,4 @@
-package io.darknote.database;
+package io.freeword.database;
 
 import android.content.Context;
 import info.guardianproject.cacheword.CacheWordHandler;
@@ -6,7 +6,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 public class DatabaseHelper extends SQLCipherOpenHelper
 {
-	protected static final String DATABASE_NAME = "darknote_database";
+	protected static final String DATABASE_NAME = "freeword_database";
 	private static final int DATABASE_VERSION = 1;
 	
 	public DatabaseHelper(Context context, CacheWordHandler cacheWordHandler) {

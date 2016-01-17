@@ -1,4 +1,4 @@
-package io.darknote.activities;
+package io.freeword.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -21,8 +21,8 @@ import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.Constants;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
 import info.guardianproject.cacheword.PassphraseSecrets;
-import io.darknote.core.NConstants;
-import io.darknote.R;
+import io.freeword.core.NConstants;
+import io.freeword.R;
 import net.simonvt.numberpicker.NumberPicker;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package io.darknote.core;
+package io.freeword.core;
 
 import android.app.Application;
 import android.content.Context;

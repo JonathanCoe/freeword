@@ -1,12 +1,12 @@
-package io.darknote.core;
+package io.freeword.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import info.guardianproject.cacheword.CacheWordHandler;
-import io.darknote.activities.LockScreenActivity;
-import io.darknote.database.DatabaseContentProvider;
+import io.freeword.activities.LockScreenActivity;
+import io.freeword.database.DatabaseContentProvider;
 
 /**
  * Handles the process of locking app.

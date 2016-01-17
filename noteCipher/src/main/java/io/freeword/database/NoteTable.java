@@ -1,4 +1,4 @@
-package io.darknote.database;
+package io.freeword.database;
 
 import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;

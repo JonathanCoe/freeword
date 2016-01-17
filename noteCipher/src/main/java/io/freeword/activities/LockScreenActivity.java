@@ -1,4 +1,4 @@
-package io.darknote.activities;
+package io.freeword.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import io.darknote.core.NConstants;
-import io.darknote.R;
+import io.freeword.core.NConstants;
+import io.freeword.R;
 
 import java.security.GeneralSecurityException;
 

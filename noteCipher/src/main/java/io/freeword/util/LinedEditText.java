@@ -1,4 +1,4 @@
-package io.darknote.util;
+package io.freeword.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,8 +6,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.EditText;
-import io.darknote.R;
-import io.darknote.activities.SettingsActivity;
+import io.freeword.R;
+import io.freeword.activities.SettingsActivity;
 
 /**
  * A custom EditText that draws lines between each line of text that is displayed.

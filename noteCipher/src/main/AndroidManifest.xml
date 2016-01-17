@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.darknote"
+    package="io.freeword"
     android:versionCode="1"
     android:versionName="0.1" >
 
@@ -18,23 +18,23 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".core.App"
+        android:name="io.freeword.core.App"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.NotesListActivity"
+            android:name="io.freeword.activities.NotesListActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".activities.NoteActivity"
-            android:parentActivityName=".activities.NotesListActivity"
+            android:name="io.freeword.activities.NoteActivity"
+            android:parentActivityName="io.freeword.activities.NotesListActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
-            android:name=".activities.LockScreenActivity"
+            android:name="io.freeword.activities.LockScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_lock_screen" >
             <intent-filter android:label="@string/app_name">
@@ -44,10 +44,10 @@
         </activity>
 		
 		<activity
-            android:name=".activities.SettingsActivity"
+            android:name="io.freeword.activities.SettingsActivity"
             android:label="@string/settings"
             android:screenOrientation="portrait"
-            android:parentActivityName=".activities.NotesListActivity"
+            android:parentActivityName="io.freeword.activities.NotesListActivity"
             android:configChanges="orientation|keyboardHidden"  >
         </activity>
         
@@ -57,8 +57,8 @@
             android:exported="false" />
 
         <provider
-                android:name="io.darknote.database.DatabaseContentProvider"
-                android:authorities="io.darknote.database"
+                android:name="io.freeword.database.DatabaseContentProvider"
+                android:authorities="io.freeword.database"
                 android:exported="false" >
         </provider>
 

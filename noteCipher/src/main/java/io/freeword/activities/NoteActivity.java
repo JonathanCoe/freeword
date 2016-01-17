@@ -1,4 +1,4 @@
-package io.darknote.activities;
+package io.freeword.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,12 +12,12 @@ import android.view.*;
 import android.widget.*;
 import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import io.darknote.R;
-import io.darknote.core.AppLockHandler;
-import io.darknote.data.Note;
-import io.darknote.database.NoteProvider;
-import io.darknote.util.LinedEditText;
-import io.darknote.util.NoteUtils;
+import io.freeword.R;
+import io.freeword.core.AppLockHandler;
+import io.freeword.data.Note;
+import io.freeword.database.NoteProvider;
+import io.freeword.util.LinedEditText;
+import io.freeword.util.NoteUtils;
 
 public class NoteActivity extends FragmentActivity implements ICacheWordSubscriber {
 

@@ -1,4 +1,4 @@
-package io.darknote.util;
+package io.freeword.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-import io.darknote.R;
+import io.freeword.R;
 
 import java.io.*;
 

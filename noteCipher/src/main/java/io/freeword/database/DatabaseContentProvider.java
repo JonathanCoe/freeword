@@ -1,4 +1,4 @@
-package io.darknote.database;
+package io.freeword.database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;
@@ -29,7 +29,7 @@ public class DatabaseContentProvider extends ContentProvider implements ICacheWo
 	private static final int NOTE = 10;
 	private static final int NOTE_ID = 20;
 	  
-    private static final String AUTHORITY = "io.darknote.database";
+    private static final String AUTHORITY = "io.freeword.database";
 	  
     // The path strings for each table in the database
     private static final String PATH_NOTE = "note";

@@ -1,4 +1,4 @@
-package io.darknote.database;
+package io.freeword.database;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
-import io.darknote.data.Note;
+import io.freeword.data.Note;
 
 import java.util.ArrayList;
 
