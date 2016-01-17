@@ -17,7 +17,6 @@ import io.freeword.core.AppLockHandler;
 import io.freeword.data.Note;
 import io.freeword.database.NoteProvider;
 import io.freeword.util.LinedEditText;
-import io.freeword.util.NoteUtils;
 
 public class NoteActivity extends FragmentActivity implements ICacheWordSubscriber {
 
@@ -336,6 +335,9 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     private void shareNote() {
         Log.d(TAG, "shareNote() called");
         String body = bodyEditText.getText().toString();
-        NoteUtils.shareText(this, body);
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, body);
+        this.startActivity(Intent.createChooser(share, this.getString(R.string.share_text)));
     }
 }
