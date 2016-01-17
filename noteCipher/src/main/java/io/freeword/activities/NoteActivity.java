@@ -16,7 +16,7 @@ import io.freeword.R;
 import io.freeword.core.AppLockHandler;
 import io.freeword.data.Note;
 import io.freeword.database.NoteProvider;
-import io.freeword.util.LinedEditText;
+import io.freeword.layout.LinedEditText;
 
 public class NoteActivity extends FragmentActivity implements ICacheWordSubscriber {
 

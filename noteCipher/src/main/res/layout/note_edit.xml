@@ -14,7 +14,7 @@
 	
 	<!-- Custom EditText that draws lines like in a notepad -->
 	<view 
-	    class="io.freeword.util.LinedEditText"
+	    class="io.freeword.layout.LinedEditText"
 	    android:id="@+id/body"
 	    style="@style/padtext"
 	    android:focusable="true"

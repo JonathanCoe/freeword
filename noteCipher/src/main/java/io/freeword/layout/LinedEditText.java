@@ -1,4 +1,4 @@
-package io.freeword.util;
+package io.freeword.layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,7 +10,8 @@ import io.freeword.R;
 import io.freeword.activities.SettingsActivity;
 
 /**
- * A custom EditText that draws lines between each line of text that is displayed.
+ * A custom EditText that draws lines between each
+ * line of text that is displayed.
  */
 public class LinedEditText extends EditText {
 
