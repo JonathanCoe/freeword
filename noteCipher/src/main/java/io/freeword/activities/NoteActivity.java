@@ -23,7 +23,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     static final String EXTRA_CREATE_NEW_NOTE = "extraCreateNewNote";
     static final String EXTRA_NOTE_ID = "extraNoteId";
 
-    private EditText titleTextView;
+    private EditText titleEditText;
     private LinedEditText bodyEditText;
 
     private CacheWordHandler cacheWordHandler;
@@ -57,64 +57,13 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        cacheWordHandler = new CacheWordHandler(this);
-        cacheWordHandler.connectToService();
+        setupCacheWord();
 
-        noteProvider = NoteProvider.get(getApplicationContext());
+        setupLayout();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        }
-        
-        setContentView(R.layout.note_edit);
+        handleNoteData();
 
-        titleTextView = (EditText) findViewById(R.id.title);
-        bodyEditText = (LinedEditText) findViewById(R.id.body);
-
-        // Show the Up button in the action bar.
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Set up the data for this activity
-        Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_CREATE_NEW_NOTE)) {
-            note = new Note();
-            noteExistsInDatabase = false;
-
-            titleTextView.requestFocus();
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-        else if (intent.hasExtra(EXTRA_NOTE_ID)) {
-            long id = intent.getLongExtra(EXTRA_NOTE_ID, 1);
-            Log.d(TAG, "Got ID " + id + " from intent extra");
-
-            note = noteProvider.getNote(id);
-            Log.d(TAG, "Retrieved the following Note from the database: " + note.toString());
-
-            if(note.getTitle().equals(PLACEHOLDER_TEXT_FOR_DATABASE)) {
-                note.setTitle("");
-            }
-            if (note.getBody().equals(PLACEHOLDER_TEXT_FOR_DATABASE)) {
-                note.setBody("");
-            }
-
-            titleTextView.setText(note.getTitle());
-            bodyEditText.setText(note.getBody());
-
-            noteExistsInDatabase = true;
-        }
-
-        if (savedInstanceState != null) {
-            mRowId = savedInstanceState.getLong(KEY_SAVED_POSITION);
-            mTextSize = savedInstanceState.getFloat(TEXT_SIZE, 0);
-        }
-
-        if (mTextSize == 0) {
-            mTextSize = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getFloat(TEXT_SIZE, 0);
-        }
-
-        if (mTextSize != 0) {
-            bodyEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
-        }
+        setupRowPositionAndTextSize(savedInstanceState);
     }
 
     @Override
@@ -236,6 +185,76 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         cacheWordHandler.connectToService();
     }
 
+    private void setupCacheWord() {
+        cacheWordHandler = new CacheWordHandler(this);
+        cacheWordHandler.connectToService();
+    }
+
+    private void setupLayout() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+        setContentView(R.layout.note_edit);
+        titleEditText = (EditText) findViewById(R.id.title);
+        bodyEditText = (LinedEditText) findViewById(R.id.body);
+        getActionBar().setDisplayHomeAsUpEnabled(true); // Show the Up button in the action bar.
+    }
+
+    private void handleNoteData() {
+        noteProvider = NoteProvider.get(getApplicationContext());
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_CREATE_NEW_NOTE)) {
+            note = new Note();
+            noteExistsInDatabase = false;
+
+            showKeyboardOnTitleEditText();
+        }
+        else if (intent.hasExtra(EXTRA_NOTE_ID)) {
+            setUpNoteFromDatabase(intent);
+        }
+    }
+
+    private void showKeyboardOnTitleEditText() {
+        titleEditText.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+
+    private void setUpNoteFromDatabase(Intent intent) {
+        long id = intent.getLongExtra(EXTRA_NOTE_ID, 1);
+        Log.d(TAG, "Got ID " + id + " from intent extra");
+
+        note = noteProvider.getNote(id);
+        Log.d(TAG, "Retrieved the following Note from the database: " + note.toString());
+
+        if(note.getTitle().equals(PLACEHOLDER_TEXT_FOR_DATABASE)) {
+            note.setTitle("");
+        }
+        if (note.getBody().equals(PLACEHOLDER_TEXT_FOR_DATABASE)) {
+            note.setBody("");
+        }
+
+        titleEditText.setText(note.getTitle());
+        bodyEditText.setText(note.getBody());
+
+        noteExistsInDatabase = true;
+    }
+
+    private void setupRowPositionAndTextSize(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mRowId = savedInstanceState.getLong(KEY_SAVED_POSITION);
+            mTextSize = savedInstanceState.getFloat(TEXT_SIZE, 0);
+        }
+
+        if (mTextSize == 0) {
+            mTextSize = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getFloat(TEXT_SIZE, 0);
+        }
+
+        if (mTextSize != 0) {
+            bodyEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+        }
+    }
+
     private void changeTextSize(float factor) {
         mTextSize = bodyEditText.getTextSize();
         mTextSize *= factor;
@@ -251,7 +270,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     private void saveNote() {
         Log.d(TAG, "saveNote() called");
 
-        String title = titleTextView.getText().toString();
+        String title = titleEditText.getText().toString();
         String body = bodyEditText.getText().toString();
 
         if(title.isEmpty()) {
@@ -285,7 +304,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
 
         Log.d(TAG, "saveNoteIfNotEmpty() called");
 
-        String title = titleTextView.getText().toString();
+        String title = titleEditText.getText().toString();
         String body = bodyEditText.getText().toString();
 
         if (title.isEmpty() && body.isEmpty()) {
