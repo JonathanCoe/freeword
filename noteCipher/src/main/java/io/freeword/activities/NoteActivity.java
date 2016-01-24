@@ -2,8 +2,10 @@ package io.freeword.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -152,7 +154,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     @Override
     public void onCacheWordOpened() {
         Log.d(TAG, "onCacheWordOpened");
-        // Nothing to do here currently
+        setCacheWordTimeout();
     }
 
     @Override
@@ -188,6 +190,12 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     private void setupCacheWord() {
         cacheWordHandler = new CacheWordHandler(this);
         cacheWordHandler.connectToService();
+    }
+
+    private void setCacheWordTimeout() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int timeout = preferences.getInt(SettingsActivity.KEY_CACHEWORD_TIMEOUT, SettingsActivity.DEFAULT_CACHEWORD_TIMEOUT);
+        cacheWordHandler.setTimeout(timeout);
     }
 
     private void setupLayout() {

@@ -3,9 +3,11 @@ package io.freeword.activities;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -28,7 +30,6 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
     private NoteProvider noteProvider;
     private ArrayList<Note> notes;
     private ListView notesListView;
-    private NoteAdapter adapter;
 
     private CacheWordHandler cacheWordHandler;
 
@@ -38,8 +39,7 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        cacheWordHandler = new CacheWordHandler(this);
-        cacheWordHandler.connectToService();
+        setupCacheWord();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -93,7 +93,7 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
     @Override
     public void onCacheWordOpened() {
         Log.d(TAG, "onCacheWordOpened");
-        // Nothing to do here currently
+        setCacheWordTimeout();
     }
 
     @Override
@@ -140,6 +140,17 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
         return super.onMenuItemSelected(featureId, item);
     }
 
+    private void setupCacheWord() {
+        cacheWordHandler = new CacheWordHandler(this);
+        cacheWordHandler.connectToService();
+    }
+
+    private void setCacheWordTimeout() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int timeout = preferences.getInt(SettingsActivity.KEY_CACHEWORD_TIMEOUT, SettingsActivity.DEFAULT_CACHEWORD_TIMEOUT);
+        cacheWordHandler.setTimeout(timeout);
+    }
+
     private void createNotesList() {
         loadNotes();
         Collections.sort(notes);
@@ -152,7 +163,7 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
     }
 
     private void setUpListView() {
-        adapter = new NoteAdapter(notes);
+        NoteAdapter adapter = new NoteAdapter(notes);
         notesListView = new ListView(this);
         notesListView = (ListView) findViewById(android.R.id.list);
         setListAdapter(adapter);
