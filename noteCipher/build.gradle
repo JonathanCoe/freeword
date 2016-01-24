@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "io.darknote"
+        applicationId "io.freeword"
         minSdkVersion 11
         targetSdkVersion 23
         multiDexEnabled true
