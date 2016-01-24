@@ -23,24 +23,28 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <activity
+                android:name="io.freeword.activities.LockScreenActivity"
+                android:configChanges="orientation|screenSize"
+                android:label="@string/title_activity_lock_screen"
+                android:windowSoftInputMode="stateVisible" >
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name="io.freeword.activities.NotesListActivity"
             android:label="@string/app_name" >
         </activity>
+
         <activity
             android:name="io.freeword.activities.NoteActivity"
             android:parentActivityName="io.freeword.activities.NotesListActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity
-            android:name="io.freeword.activities.LockScreenActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_lock_screen" >
-            <intent-filter android:label="@string/app_name">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 		
 		<activity

@@ -1,6 +1,7 @@
 package io.freeword.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,9 +60,10 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
         createPassphraseView = findViewById(R.id.llCreatePassphrase);
         enterPassphraseView = findViewById(R.id.llEnterPassphrase);
 
-        enterPassphraseEditText = (EditText) findViewById(R.id.editEnterPassphrase);
         newPassphraseEditText = (EditText) findViewById(R.id.editNewPassphrase);
         confirmNewPassphraseEditText = (EditText) findViewById(R.id.editConfirmNewPassphrase);
+
+        enterPassphraseEditText = (EditText) findViewById(R.id.editEnterPassphrase);
 
         ViewFlipper vf = (ViewFlipper) findViewById(R.id.viewFlipper1);
         LinearLayout flipView1 = (LinearLayout) findViewById(R.id.flipView1);
@@ -218,7 +220,6 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
                                    R.string.lock_screen_passphrase_incorrect,
                                    Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Cacheword pass verification failed: " + e.getMessage());
-                    return;
                 }
             }
         });
@@ -237,6 +238,7 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
                             openButton.performClick();
+                            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
                         }
                     });
                     return true;
