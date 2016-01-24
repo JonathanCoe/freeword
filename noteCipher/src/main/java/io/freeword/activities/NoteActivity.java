@@ -79,6 +79,9 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         if (intent.hasExtra(EXTRA_CREATE_NEW_NOTE)) {
             note = new Note();
             noteExistsInDatabase = false;
+
+            titleTextView.requestFocus();
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
         else if (intent.hasExtra(EXTRA_NOTE_ID)) {
             long id = intent.getLongExtra(EXTRA_NOTE_ID, 1);
