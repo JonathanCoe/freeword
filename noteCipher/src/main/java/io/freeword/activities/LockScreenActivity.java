@@ -19,8 +19,8 @@ import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import info.guardianproject.cacheword.CacheWordHandler;
 import info.guardianproject.cacheword.ICacheWordSubscriber;
-import io.freeword.util.PassphraseUtil;
 import io.freeword.R;
+import io.freeword.util.PassphraseUtil;
 
 import java.security.GeneralSecurityException;
 
@@ -28,18 +28,18 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
 
     private CacheWordHandler cacheWordHandler;
 
-    private String mPasswordError;
+    private String passwordError;
 
     private EditText enterPassphraseEditText;
     private EditText newPassphraseEditText;
     private EditText confirmNewPassphraseEditText;
 
-    private View mViewCreatePassphrase;
-    private View mViewEnterPassphrase;
+    private View createPassphraseView;
+    private View enterPassphraseView;
 
-    private Button mBtnOpen;
+    private Button openButton;
 
-    private TwoViewSlider mSlider;
+    private TwoViewSlider twoViewSlider;
 
     private static final String TAG = LockScreenActivity.class.getSimpleName();
 
@@ -56,17 +56,18 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
 
         setContentView(R.layout.activity_lock_screen);
 
-        mViewCreatePassphrase = findViewById(R.id.llCreatePassphrase);
-        mViewEnterPassphrase = findViewById(R.id.llEnterPassphrase);
+        createPassphraseView = findViewById(R.id.llCreatePassphrase);
+        enterPassphraseView = findViewById(R.id.llEnterPassphrase);
 
         enterPassphraseEditText = (EditText) findViewById(R.id.editEnterPassphrase);
         newPassphraseEditText = (EditText) findViewById(R.id.editNewPassphrase);
         confirmNewPassphraseEditText = (EditText) findViewById(R.id.editConfirmNewPassphrase);
+
         ViewFlipper vf = (ViewFlipper) findViewById(R.id.viewFlipper1);
         LinearLayout flipView1 = (LinearLayout) findViewById(R.id.flipView1);
         LinearLayout flipView2 = (LinearLayout) findViewById(R.id.flipView2);
 
-        mSlider = new TwoViewSlider(vf, flipView1, flipView2, newPassphraseEditText, confirmNewPassphraseEditText);
+        twoViewSlider = new TwoViewSlider(vf, flipView1, flipView2, newPassphraseEditText, confirmNewPassphraseEditText);
     }
 
     @Override
@@ -107,14 +108,14 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     }
 
     private void showValidationError() {
-        Toast.makeText(LockScreenActivity.this, mPasswordError, Toast.LENGTH_LONG).show();
+        Toast.makeText(LockScreenActivity.this, passwordError, Toast.LENGTH_LONG).show();
         newPassphraseEditText.requestFocus();
     }
 
     private void showInequalityError() {
         Toast.makeText(LockScreenActivity.this,
-                R.string.lock_screen_passphrases_not_matching,
-                Toast.LENGTH_SHORT).show();
+                       R.string.lock_screen_passphrases_not_matching,
+                       Toast.LENGTH_SHORT).show();
         clearNewFields();
     }
 
@@ -125,8 +126,9 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
 
     private boolean isPasswordValid() {
     	boolean valid = PassphraseUtil.validatePassphrase(newPassphraseEditText.getText().toString().toCharArray());
-    	if(!valid)
-    		mPasswordError = getString(R.string.pass_err_length);
+    	if(!valid) {
+            passwordError = getString(R.string.pass_err_length);
+        }
         return valid;
     }
 
@@ -135,20 +137,19 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     }
 
     private void initializePassphrase() {
-        // Passphrase is not set, so allow the user to create one
-
-        mViewCreatePassphrase.setVisibility(View.VISIBLE);
-        mViewEnterPassphrase.setVisibility(View.GONE);
+        createPassphraseView.setVisibility(View.VISIBLE);
+        enterPassphraseView.setVisibility(View.GONE);
 
         newPassphraseEditText.setOnEditorActionListener(new OnEditorActionListener() {
-
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (!isPasswordValid())
+                    if (!isPasswordValid()) {
                         showValidationError();
-                    else
-                        mSlider.showConfirmationField();
+                    }
+                    else {
+                        twoViewSlider.showConfirmationField();
+                    }
                 }
                 return false;
             }
@@ -161,7 +162,7 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
                 if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_DONE) {
                     if (!newEqualsConfirmation()) {
                         showInequalityError();
-                        mSlider.showNewPasswordField();
+                        twoViewSlider.showNewPasswordField();
                     }
                 }
                 return false;
@@ -175,21 +176,20 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
             public void onClick(View v) {
                 if (!isPasswordValid()) {
                     showValidationError();
-                    mSlider.showNewPasswordField();
+                    twoViewSlider.showNewPasswordField();
                 }
                 else if (isConfirmationFieldEmpty()) {
-                    mSlider.showConfirmationField();
+                    twoViewSlider.showConfirmationField();
                 }
                 else if (!newEqualsConfirmation()) {
                     showInequalityError();
-                    mSlider.showNewPasswordField();
+                    twoViewSlider.showNewPasswordField();
                 }
                 else {
                     try {
                         cacheWordHandler.setPassphrase(newPassphraseEditText.getText().toString().toCharArray());
                     }
                     catch (GeneralSecurityException e) {
-                        // TODO initialization failed
                         Log.e(TAG, "Cacheword pass initialization failed: " + e.getMessage());
                     }
                 }
@@ -198,22 +198,22 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     }
 
     private void promptPassphrase() {
-        mViewCreatePassphrase.setVisibility(View.GONE);
-        mViewEnterPassphrase.setVisibility(View.VISIBLE);
+        createPassphraseView.setVisibility(View.GONE);
+        enterPassphraseView.setVisibility(View.VISIBLE);
 
-        mBtnOpen = (Button) findViewById(R.id.btnOpen);
-        mBtnOpen.setOnClickListener(new OnClickListener() {
+        openButton = (Button) findViewById(R.id.btnOpen);
+        openButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (enterPassphraseEditText.getText().toString().length() == 0)
+                if (enterPassphraseEditText.getText().toString().length() == 0) {
                     return;
-                // Check passphrase
+                }
                 try {
+                    // Check the passphrase entered by the user
                     cacheWordHandler.setPassphrase(enterPassphraseEditText.getText().toString().toCharArray());
                 }
                 catch (GeneralSecurityException e) {
                     enterPassphraseEditText.setText("");
-                    // TODO implement try again and wipe if fail
                     Toast.makeText(LockScreenActivity.this,
                                    R.string.lock_screen_passphrase_incorrect,
                                    Toast.LENGTH_SHORT).show();
@@ -232,13 +232,11 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
                 {
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     Handler threadHandler = new Handler();
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0, new ResultReceiver(
-                            threadHandler)
-                    {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0, new ResultReceiver(threadHandler) {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
-                            mBtnOpen.performClick();
+                            openButton.performClick();
                         }
                     });
                     return true;
@@ -261,8 +259,11 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
         private Animation pushLeftIn;
         private Animation pushLeftOut;
 
-        public TwoViewSlider(ViewFlipper flipper, LinearLayout container1, LinearLayout container2,
-                View view1, View view2) {
+        public TwoViewSlider(ViewFlipper flipper,
+                             LinearLayout container1,
+                             LinearLayout container2,
+                             View view1,
+                             View view2) {
             this.flipper = flipper;
             this.container1 = container1;
             this.container2 = container2;
@@ -273,22 +274,21 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
             pushRightOut = AnimationUtils.loadAnimation(LockScreenActivity.this, R.anim.push_right_out);
             pushLeftIn = AnimationUtils.loadAnimation(LockScreenActivity.this, R.anim.push_left_in);
             pushLeftOut = AnimationUtils.loadAnimation(LockScreenActivity.this, R.anim.push_left_out);
-
         }
 
         public void showNewPasswordField() {
-            if (firstIsShown)
+            if (firstIsShown) {
                 return;
-
+            }
             flipper.setInAnimation(pushRightIn);
             flipper.setOutAnimation(pushRightOut);
             flip();
         }
 
         public void showConfirmationField() {
-            if (!firstIsShown)
+            if (!firstIsShown) {
                 return;
-
+            }
             flipper.setInAnimation(pushLeftIn);
             flipper.setOutAnimation(pushLeftOut);
             flip();
@@ -299,7 +299,8 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
                 firstIsShown = false;
                 container2.removeAllViews();
                 container2.addView(secondView);
-            } else {
+            }
+            else {
                 firstIsShown = true;
                 container1.removeAllViews();
                 container1.addView(firstView);
