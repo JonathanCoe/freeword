@@ -74,6 +74,7 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     protected void onPause() {
         super.onPause();
         cacheWordHandler.disconnectFromService();
+        hideSoftKeyboard();
     }
 
     @Override
@@ -106,6 +107,15 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     private void showSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    private void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = this.getCurrentFocus();
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private boolean newEqualsConfirmation() {
