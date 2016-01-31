@@ -114,7 +114,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
 
             case LOCK_ID:
                 saveNoteIfNotEmpty();
-                onCacheWordLocked();
+                cacheWordHandler.lock();
                 return true;
 
             case DELETE_ID:
