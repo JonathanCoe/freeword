@@ -38,8 +38,6 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     private View createPassphraseView;
     private View enterPassphraseView;
 
-    private Button openButton;
-
     private TwoViewSlider twoViewSlider;
 
     private static final String TAG = LockScreenActivity.class.getSimpleName();
@@ -82,6 +80,7 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     protected void onResume() {
         super.onResume();
         cacheWordHandler.connectToService();
+        showSoftKeyboard();
     }
 
     @Override
@@ -102,6 +101,11 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
 
         cacheWordHandler.disconnectFromService();
         finish();
+    }
+
+    private void showSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     private boolean newEqualsConfirmation() {
@@ -203,49 +207,38 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
         createPassphraseView.setVisibility(View.GONE);
         enterPassphraseView.setVisibility(View.VISIBLE);
 
-        openButton = (Button) findViewById(R.id.btnOpen);
-        openButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enterPassphraseEditText.getText().toString().length() == 0) {
-                    return;
-                }
-                try {
-                    // Check the passphrase entered by the user
-                    cacheWordHandler.setPassphrase(enterPassphraseEditText.getText().toString().toCharArray());
-                }
-                catch (GeneralSecurityException e) {
-                    enterPassphraseEditText.setText("");
-                    Toast.makeText(LockScreenActivity.this,
-                                   R.string.lock_screen_passphrase_incorrect,
-                                   Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "Cacheword pass verification failed: " + e.getMessage());
-                }
-            }
-        });
-
         enterPassphraseEditText.setOnEditorActionListener(new OnEditorActionListener()
         {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
             {
-                if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_GO)
-                {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    Handler threadHandler = new Handler();
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0, new ResultReceiver(threadHandler) {
-                        @Override
-                        protected void onReceiveResult(int resultCode, Bundle resultData) {
-                            super.onReceiveResult(resultCode, resultData);
-                            openButton.performClick();
-                            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-                        }
-                    });
-                    return true;
+                if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_GO) {
+                    return !checkPassphrase();
                 }
                 return false;
             }
         });
+    }
+
+    private boolean checkPassphrase() {
+        if (enterPassphraseEditText.getText().toString().length() == 0) {
+            return false;
+        }
+        try {
+            // Check the passphrase entered by the user
+            cacheWordHandler.setPassphrase(enterPassphraseEditText.getText().toString().toCharArray());
+        }
+        catch (GeneralSecurityException e) {
+            return handleIncorrectPassphrase(e);
+        }
+        return true;
+    }
+
+    private boolean handleIncorrectPassphrase(GeneralSecurityException e) {
+        Log.e(TAG, "Cacheword pass verification failed: " + e.getMessage());
+        enterPassphraseEditText.setText("");
+        Toast.makeText(LockScreenActivity.this, R.string.lock_screen_passphrase_incorrect, Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     private class TwoViewSlider {
