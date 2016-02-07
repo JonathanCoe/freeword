@@ -8,7 +8,8 @@
         <EditTextPreference
             android:key="encrypted_secrets"
             android:title="@string/change_passphrase"
-            android:dialogTitle="@string/enter_new_passphrase" />
+            android:dialogTitle="@string/enter_new_passphrase"
+            android:password="true" />
         <CheckBoxPreference
             android:key="use_lines_in_notes"
             android:title="@string/use_lines_in_notes"
