@@ -19,6 +19,12 @@ android {
     }
 }
 
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile 'info.guardianproject.cacheword:cachewordlib:0.1'
     compile project(':androidnumberpickerb4562f')
@@ -26,5 +32,5 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:23.1.1'
-    compile files('libs/sqlcipher.jar')
+    compile 'net.zetetic.android-database-sqlcipher:android-database-sqlcipher::3.3.1-2@aar'
 }
