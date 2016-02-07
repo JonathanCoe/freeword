@@ -66,6 +66,7 @@
 	<string name="vibrate_when_unlocked_summ">If enabled, the device will vibrate every time Freeword is
         unlocked with a passphrase</string>
 	<string name="change_passphrase">Change Passphrase</string>
+	<string name="enter_new_passphrase">Enter new passphrase</string>
     <string name="passphrase_changed">Passphrase successfully changed</string>
 	
 </resources>
