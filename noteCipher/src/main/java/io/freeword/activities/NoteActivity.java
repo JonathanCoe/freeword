@@ -33,11 +33,14 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     private NoteProvider noteProvider;
     private Note note;
 
+    private long mRowId = -1;
+    private float mTextSize = 0;
+
+    private boolean noteExistsInDatabase;
+
     private static final int DEFAULT_TITLE_LENGTH = 8;
 
     private static final String KEY_SAVED_POSITION = "keySavedPosition";
-    private long mRowId = -1;
-    private float mTextSize = 0;
 
     private static final int SAVE_ID = Menu.FIRST;
     private static final int LOCK_ID = Menu.FIRST + 1;
@@ -51,8 +54,6 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
 
     private static final String PLACEHOLDER_TEXT_FOR_DATABASE = "*********";
 
-    private boolean noteExistsInDatabase;
-
     private static final String TAG = NoteActivity.class.getSimpleName();
     
     @Override
@@ -60,6 +61,8 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         super.onCreate(savedInstanceState);
 
         setupCacheWord();
+
+        setSecureLayoutParams();
 
         setupLayout();
 
@@ -76,7 +79,7 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
 	        .setIcon(R.drawable.save)
 	    	.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
-        menu.add(0, LOCK_ID, 0, R.string.menu_lock)
+        menu.add(0, LOCK_ID, 0, R.string.menu_item_lock)
                 .setIcon(R.drawable.lock)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
@@ -192,6 +195,12 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
         cacheWordHandler.connectToService();
     }
 
+    private void setSecureLayoutParams() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+    }
+
     private void setCacheWordTimeout() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int timeout = preferences.getInt(SettingsActivity.KEY_CACHEWORD_TIMEOUT, SettingsActivity.DEFAULT_CACHEWORD_TIMEOUT);
@@ -199,9 +208,6 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     }
 
     private void setupLayout() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        }
         setContentView(R.layout.note_edit);
         titleEditText = (EditText) findViewById(R.id.title);
         bodyEditText = (LinedEditText) findViewById(R.id.body);
