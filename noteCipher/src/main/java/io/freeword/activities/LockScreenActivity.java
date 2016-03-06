@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -46,28 +44,11 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        cacheWordHandler = new CacheWordHandler(this);
-        cacheWordHandler.connectToService();
+        setupCacheword();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        }
+        setSecureLayoutParams();
 
-        setContentView(R.layout.activity_lock_screen);
-
-        createPassphraseView = findViewById(R.id.llCreatePassphrase);
-        enterPassphraseView = findViewById(R.id.llEnterPassphrase);
-
-        newPassphraseEditText = (EditText) findViewById(R.id.editNewPassphrase);
-        confirmNewPassphraseEditText = (EditText) findViewById(R.id.editConfirmNewPassphrase);
-
-        enterPassphraseEditText = (EditText) findViewById(R.id.editEnterPassphrase);
-
-        ViewFlipper vf = (ViewFlipper) findViewById(R.id.viewFlipper1);
-        LinearLayout flipView1 = (LinearLayout) findViewById(R.id.flipView1);
-        LinearLayout flipView2 = (LinearLayout) findViewById(R.id.flipView2);
-
-        twoViewSlider = new TwoViewSlider(vf, flipView1, flipView2, newPassphraseEditText, confirmNewPassphraseEditText);
+        setupLayout();
     }
 
     @Override
@@ -102,6 +83,35 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
 
         cacheWordHandler.disconnectFromService();
         finish();
+    }
+
+    private void setupCacheword() {
+        cacheWordHandler = new CacheWordHandler(this);
+        cacheWordHandler.connectToService();
+    }
+
+    private void setSecureLayoutParams() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+    }
+
+    private void setupLayout() {
+        setContentView(R.layout.activity_lock_screen);
+
+        createPassphraseView = findViewById(R.id.llCreatePassphrase);
+        enterPassphraseView = findViewById(R.id.llEnterPassphrase);
+
+        newPassphraseEditText = (EditText) findViewById(R.id.editNewPassphrase);
+        confirmNewPassphraseEditText = (EditText) findViewById(R.id.editConfirmNewPassphrase);
+
+        enterPassphraseEditText = (EditText) findViewById(R.id.editEnterPassphrase);
+
+        ViewFlipper vf = (ViewFlipper) findViewById(R.id.viewFlipper1);
+        LinearLayout flipView1 = (LinearLayout) findViewById(R.id.flipView1);
+        LinearLayout flipView2 = (LinearLayout) findViewById(R.id.flipView2);
+
+        twoViewSlider = new TwoViewSlider(vf, flipView1, flipView2, newPassphraseEditText, confirmNewPassphraseEditText);
     }
 
     private void showSoftKeyboard() {
