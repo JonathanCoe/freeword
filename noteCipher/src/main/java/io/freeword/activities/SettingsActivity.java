@@ -32,9 +32,9 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
     static final String KEY_CACHEWORD_TIMEOUT = "cacheWordTimeout";
     static final int DEFAULT_CACHEWORD_TIMEOUT = 300;
 
-    private static final String SHOW_LINES_IN_NOTES = "use_lines_in_notes";
+    private CacheWordHandler cacheWordHandler;
 
-	private CacheWordHandler cacheWordHandler;
+    private static final String SHOW_LINES_IN_NOTES = "use_lines_in_notes";
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
