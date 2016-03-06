@@ -44,41 +44,9 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
 
 		setupCacheWord();
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-		}
+        setSecureLayoutParams();
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		// If in Android 3+ use a preference fragment which is the new recommended way
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new PreferenceFragment() {
-                    @Override
-                    public void onCreate(final Bundle savedInstanceState) {
-                        super.onCreate(savedInstanceState);
-
-                        addPreferencesFromResource(R.xml.settings);
-
-                        findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
-                            .setOnPreferenceClickListener(changeLockTimeoutListener);
-
-                        findPreference(Constants.SHARED_PREFS_SECRETS)
-                            .setOnPreferenceChangeListener(passphraseChangeListener);
-                    }
-                })
-            .commit();
-		}
-        else {
-			// Otherwise load the preferences.xml in the Activity like in previous Android versions
-			addPreferencesFromResource(R.xml.settings);
-
-			findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
-				.setOnPreferenceClickListener(changeLockTimeoutListener);
-
-			findPreference(Constants.SHARED_PREFS_SECRETS)
-				.setOnPreferenceChangeListener(passphraseChangeListener);
-		}
+        setupLayout();
 	}
 
     @Override
@@ -123,6 +91,52 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
         setCacheWordTimeout();
     }
 
+    private void setupCacheWord() {
+        cacheWordHandler = new CacheWordHandler(this);
+        cacheWordHandler.connectToService();
+    }
+
+    private void setSecureLayoutParams() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+    }
+
+    private void setupLayout() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupPreferences();
+    }
+
+    private void setupPreferences() {
+        // If in Android 3+ use a preference fragment which is the new recommended way
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getFragmentManager().beginTransaction().replace(android.R.id.content, new PreferenceFragment() {
+                @Override
+                public void onCreate(final Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+
+                    addPreferencesFromResource(R.xml.settings);
+
+                    findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
+                            .setOnPreferenceClickListener(changeLockTimeoutListener);
+
+                    findPreference(Constants.SHARED_PREFS_SECRETS)
+                            .setOnPreferenceChangeListener(passphraseChangeListener);
+                }
+            }).commit();
+        }
+        else {
+            // Otherwise load the preferences.xml in the Activity like in previous Android versions
+            addPreferencesFromResource(R.xml.settings);
+
+            findPreference(Constants.SHARED_PREFS_TIMEOUT_SECONDS)
+                    .setOnPreferenceClickListener(changeLockTimeoutListener);
+
+            findPreference(Constants.SHARED_PREFS_SECRETS)
+                    .setOnPreferenceChangeListener(passphraseChangeListener);
+        }
+    }
+
     void showLockScreen() {
         Intent intent = new Intent(this, LockScreenActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -134,11 +148,6 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
     public static boolean getNoteLinesOption(Context context) {
         boolean defValue = context.getResources().getBoolean(R.bool.notecipher_uselines_default);
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(SHOW_LINES_IN_NOTES, defValue);
-    }
-
-    private void setupCacheWord() {
-        cacheWordHandler = new CacheWordHandler(this);
-        cacheWordHandler.connectToService();
     }
 
     private void setCacheWordTimeout() {
