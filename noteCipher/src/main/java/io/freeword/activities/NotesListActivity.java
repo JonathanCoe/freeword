@@ -23,10 +23,6 @@ import java.util.Collections;
 
 public class NotesListActivity extends ListActivity implements ICacheWordSubscriber {
 
-    private static final int CREATE_NOTE_ID = Menu.FIRST;
-    private static final int LOCK_ID = Menu.FIRST + 1;
-    private static final int SETTINGS_ID = Menu.FIRST + 2;
-
     private NoteProvider noteProvider;
     private ArrayList<Note> notes;
     private ListView notesListView;
@@ -41,12 +37,9 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
 
         setupCacheWord();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        }
-        setContentView(R.layout.notes_list);
+        setSecureLayoutParms();
 
-        createNotesList();
+        setupLayout();
     }
 
     @Override
@@ -99,50 +92,59 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-
-        menu.add(0, CREATE_NOTE_ID, 0, R.string.menu_insert)
-                .setIcon(R.drawable.new_content)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-        menu.add(0, LOCK_ID, 0, R.string.menu_lock)
-                .setIcon(R.drawable.lock)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-        menu.add(0, SETTINGS_ID, 0, R.string.settings)
-                .setIcon(R.drawable.settings)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
+        getMenuInflater().inflate(R.menu.notes_list_activity_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()) {
-            case CREATE_NOTE_ID:
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.notes_list_activity_menu_item_new:
                 Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
                 intent.putExtra(NoteActivity.EXTRA_CREATE_NEW_NOTE, true);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
 
-            case LOCK_ID:
+            case R.id.notes_list_activity_menu_item_lock:
                 if (!cacheWordHandler.isLocked()) {
                     cacheWordHandler.lock();
                 }
                 return true;
 
-            case SETTINGS_ID:
-                if (!cacheWordHandler.isLocked()) {
-                    startActivity(new Intent(this, SettingsActivity.class));
-                }
+            case R.id.notes_list_activity_menu_item_backups:
+                Intent intent2 = new Intent(this, BackupsActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent2);
+                return true;
+
+            case R.id.notes_list_activity_menu_item_settings:
+                Intent intent3 = new Intent(this, SettingsActivity.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent3);
                 return true;
         }
 
-        return super.onMenuItemSelected(featureId, item);
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupCacheWord() {
         cacheWordHandler = new CacheWordHandler(this);
         cacheWordHandler.connectToService();
+    }
+
+    private void setSecureLayoutParms() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+    }
+
+    private void setupLayout() {
+        setContentView(R.layout.notes_list);
+
+        createNotesList();
     }
 
     private void setCacheWordTimeout() {
