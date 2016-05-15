@@ -15,7 +15,7 @@ local.properties
 
 # IntelliJ IDEA project files
 .idea/
-darknote.iml
+*.iml
 
 # IntelliJ generated binaries
 out/
