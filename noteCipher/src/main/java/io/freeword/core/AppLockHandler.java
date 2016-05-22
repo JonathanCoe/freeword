@@ -1,6 +1,5 @@
 package io.freeword.core;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -8,27 +7,27 @@ import info.guardianproject.cacheword.CacheWordHandler;
 import io.freeword.activities.LockScreenActivity;
 import io.freeword.database.DatabaseContentProvider;
 
-/**
- * Handles the process of locking app.
- */
-@SuppressLint("InlinedApi")
-public class AppLockHandler
-{
-	/**
-	 * Does all the work necessary to securely lock the application.
-	 * 
-	 * @param cacheWordHandler - An instance of CacheWordHandler to be
-	 * provided by the caller of this method
-	 */
-	public static void runLockRoutine(CacheWordHandler cacheWordHandler)
-	{
-    	cacheWordHandler.lock();
-        cacheWordHandler.disconnectFromService();
+public class AppLockHandler {
+
+	public static void lockApp(CacheWordHandler cacheWordHandler) {
+        lockCacheword(cacheWordHandler);
     	DatabaseContentProvider.closeDatabase();
-    	
-    	// Open the lock screen activity
-		Context appContext = App.getContext();
+        openLockScreen();
+	}
+
+    private static void lockCacheword(CacheWordHandler cacheWordHandler) {
+        cacheWordHandler.lock();
+        cacheWordHandler.disconnectFromService();
+    }
+
+    private static void openLockScreen() {
+        Context appContext = App.getContext();
         Intent intent = new Intent(appContext, LockScreenActivity.class);
+        setIntentFlags(intent);
+        appContext.startActivity(intent);
+    }
+
+    private static void setIntentFlags(Intent intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) { // FLAG_ACTIVITY_CLEAR_TASK only exists in API 11 and later
         	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                             Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -38,6 +37,5 @@ public class AppLockHandler
         	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                             Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
-        appContext.startActivity(intent);
-	}
+    }
 }

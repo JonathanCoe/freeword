@@ -143,14 +143,14 @@ public class NoteActivity extends FragmentActivity implements ICacheWordSubscrib
     @Override
     public void onCacheWordUninitialized() {
         Log.d(TAG, "onCacheWordUninitialized");
-        AppLockHandler.runLockRoutine(cacheWordHandler);
+        AppLockHandler.lockApp(cacheWordHandler);
         finish();
     }
 
     @Override
     public void onCacheWordLocked() {
         Log.d(TAG, "onCacheWordLocked");
-        AppLockHandler.runLockRoutine(cacheWordHandler);
+        AppLockHandler.lockApp(cacheWordHandler);
         finish();
     }
 
