@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/notes_list_activity_menu_item_new"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/new_content"
+        android:title="@string/menu_item_new_note"
+        />
+
+    <item
+        android:id="@+id/notes_list_activity_menu_item_lock"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/lock"
+        android:title="@string/menu_item_lock"
+        />
+
+    <item
+        android:id="@+id/notes_list_activity_menu_item_settings"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="@string/menu_item_settings"  />
+
+</menu>

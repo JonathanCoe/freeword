@@ -13,7 +13,7 @@
         <CheckBoxPreference
             android:key="use_lines_in_notes"
             android:title="@string/use_lines_in_notes"
-            android:summary="@string/use_lines_in_notes_summ"
+            android:summary="@string/use_lines_in_notes_summary"
             android:defaultValue="@bool/notecipher_uselines_default" />
     </PreferenceCategory>
 </PreferenceScreen>

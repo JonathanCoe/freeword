@@ -114,16 +114,10 @@ public class NotesListActivity extends ListActivity implements ICacheWordSubscri
                 }
                 return true;
 
-            case R.id.notes_list_activity_menu_item_backups:
-                Intent intent2 = new Intent(this, BackupsActivity.class);
+            case R.id.notes_list_activity_menu_item_settings:
+                Intent intent2 = new Intent(this, SettingsActivity.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent2);
-                return true;
-
-            case R.id.notes_list_activity_menu_item_settings:
-                Intent intent3 = new Intent(this, SettingsActivity.class);
-                intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent3);
                 return true;
         }
 

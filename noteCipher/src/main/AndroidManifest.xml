@@ -49,7 +49,7 @@
 		
 		<activity
             android:name="io.freeword.activities.SettingsActivity"
-            android:label="@string/settings"
+            android:label="@string/settings_activity_title"
             android:screenOrientation="portrait"
             android:parentActivityName="io.freeword.activities.NotesListActivity"
             android:configChanges="orientation|keyboardHidden"  >
