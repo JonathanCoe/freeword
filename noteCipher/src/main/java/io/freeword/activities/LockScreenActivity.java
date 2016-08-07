@@ -23,6 +23,8 @@ import io.freeword.util.PassphraseUtil;
 
 import java.security.GeneralSecurityException;
 
+import static io.freeword.util.PassphraseUtil.MINIMUM_PASSPHRASE_LENGTH;
+
 public class LockScreenActivity extends Activity implements ICacheWordSubscriber {
 
     private CacheWordHandler cacheWordHandler;
@@ -153,7 +155,9 @@ public class LockScreenActivity extends Activity implements ICacheWordSubscriber
     private boolean isPasswordValid() {
     	boolean valid = PassphraseUtil.validatePassphrase(newPassphraseEditText.getText().toString().toCharArray());
     	if(!valid) {
-            passwordError = getString(R.string.pass_err_length);
+            passwordError = getString(R.string.pass_err_length_part0) +
+                            MINIMUM_PASSPHRASE_LENGTH +
+                            getString(R.string.pass_err_length_part1);
         }
         return valid;
     }

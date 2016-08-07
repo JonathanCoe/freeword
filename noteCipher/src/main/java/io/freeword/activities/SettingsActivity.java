@@ -27,6 +27,8 @@ import net.simonvt.numberpicker.NumberPicker;
 
 import java.io.IOException;
 
+import static io.freeword.util.PassphraseUtil.MINIMUM_PASSPHRASE_LENGTH;
+
 public class SettingsActivity extends SherlockPreferenceActivity implements ICacheWordSubscriber {
 
     static final String KEY_CACHEWORD_TIMEOUT = "cacheWordTimeout";
@@ -176,7 +178,10 @@ public class SettingsActivity extends SherlockPreferenceActivity implements ICac
                     Toast.makeText(getApplicationContext(), R.string.passphrase_changed, Toast.LENGTH_SHORT).show();
 				}
                 else {
-					Toast.makeText(getApplicationContext(), R.string.pass_err_length, Toast.LENGTH_SHORT).show();
+                    String passphraseErrorMessage = getString(R.string.pass_err_length_part0) +
+                                                    MINIMUM_PASSPHRASE_LENGTH +
+                                                    getString(R.string.pass_err_length_part1);
+					Toast.makeText(getApplicationContext(), passphraseErrorMessage, Toast.LENGTH_SHORT).show();
 				}
 			}
             catch (IOException e) {
