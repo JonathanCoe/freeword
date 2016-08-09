@@ -4,9 +4,9 @@ A simple note-taking app for Android, with an emphasis on privacy and security.
 
 Freeword is a fork of [NoteCipher](https://github.com/guardianproject/notecipher), an app by the [Guardian Project](https://guardianproject.info/). 
 
-<img src="https://i.imgur.com/TErnr1W.png" align="left" height="425" width="240" hspace="5" vspace="30">
-<img src="https://i.imgur.com/CwVTPTb.png" align="left" height="425" width="240" hspace="5" vspace="30">
-<img src="https://i.imgur.com/fWtNwHC.png" align="left" height="425" width="240" hspace="5" vspace="30">
+<img src="https://i.imgur.com/TErnr1W.png" align="left" height="460" width="259" hspace="1" vspace="25">
+<img src="https://i.imgur.com/CwVTPTb.png" align="left" height="460" width="259" hspace="1" vspace="25">
+<img src="https://i.imgur.com/fWtNwHC.png" align="left" height="460" width="259" hspace="1" vspace="25">
 
 
 The main feature of the app is security of the user's notes, using [SQLCipher](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/) for encrypted storage of notes and [CacheWord](https://github.com/guardianproject/cacheword) for securely handling user credentials (passwords) and storage encryption keys. 
