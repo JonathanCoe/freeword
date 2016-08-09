@@ -1,37 +1,28 @@
-# NoteCipher
+# Freeword
 
-A simple and secure note taking app previously known as notepadbot.
+A simple note-taking app for Android, with an emphasis on privacy and security. 
 
-Showcase app for [SQLCipher for Android](http://sqlcipher.net/sqlcipher-for-android) and [CacheWord](https://github.com/guardianproject/cacheword).
+Freeword is a fork of [NoteCipher](https://github.com/guardianproject/notecipher), an app by the [Guardian Project](https://guardianproject.info/). 
 
-```
- git clone https://github.com/guardianproject/notepadbot.git
- cd notepadbot
- git submodule update --init --recursive
- ./setup-ant.sh
- ant -buildfile app/build.xml clean debug
- ls -l app/bin/NoteCipher*.apk
-```
+<img src="https://i.imgur.com/TErnr1W.png" align="left" height="425" width="240" hspace="5" vspace="30">
+<img src="https://i.imgur.com/CwVTPTb.png" align="left" height="425" width="240" hspace="5" vspace="30">
+<img src="https://i.imgur.com/fWtNwHC.png" align="left" height="425" width="240" hspace="5" vspace="30">
 
-## Development Setup
 
-Follow these steps to setup your dev environment using Eclipse:
+The main feature of the app is security of the user's notes, using [SQLCipher](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/) for encrypted storage of notes and [CacheWord](https://github.com/guardianproject/cacheword) for securely handling user credentials (passwords) and storage encryption keys. 
 
-1. create a new Eclipse *workspace* in the root director of the repo.
-2. For Cacheword, import this directory `external/cacheword/cachewordlib/`, using "Import -> Android -> Existing Android Code Into Workspace":
-3. Then, "Import -> General -> Existing Projects Into Workspace" for the `app/` directory.
+## Note on Security
+
+Although Freeword is intended to offer privacy and security to its users, it should not currently be regarded as secure. It has been developed in my free time and has not been reviewed or audited by anyone. It may well have seriously security flaws. Please take this warning seriously!
 
 ## License and Credits 
 
-* Notepad Icon originally from
-    http://yaromanzarek.deviantart.com/art/iPhone-style-Notepad-icon-133822563
+Freeword is licensed under the [Gnu General Public License version 3](https://www.gnu.org/licenses/gpl-3.0.html). 
 
-This project is licensed under the Gnu General Public License version 3. 
-
-Copyright (C) 2015 Jonathan Coe <jcoe@protonmail.ch>
-Copyright (C) 2013 Abel Luck <abel@guardianproject.info>
-Copyright (C) 2011-2013 Nathan Freitas <nathan@freitas.net>
-Copyright (C) 2011 Hans-Christoph Steiner <hans@eds.org>
-Copyright (C) 2008 The Android Open Source Project
+Copyright (C) 2015-2016 Jonathan Coe  
+Copyright (C) 2011-2014 Hans-Christoph Steiner  
+Copyright (C) 2011-2013 Nathan Freitas  
+Copyright (C) 2013 Abel Luck  
+Copyright (C) 2008 The Android Open Source Project  
 Copyright (C) 2008 Google Inc.
 
